@@ -1,0 +1,78 @@
+@import '../Home/variables.scss';
+
+.FooterContainer {
+  background: $background-main;
+  padding-top: 150px;
+  width: 100%;
+}
+
+.FooterCo {
+  display: flex;
+  justify-content: center;
+  background-color: #fcf7f77a;
+}
+
+.innerContent {
+  margin-right: 65px;
+  padding-top: 30px;
+}
+
+.innerTextContent {
+  padding-left: 30px;
+  font-size: $font-size20;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.ulFooterText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fcf7f77a;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+.liHover {
+  padding-right: 10px;
+  font-size: $font-size15;
+}
+
+.liHov {
+  padding-right: 10px;
+}
+
+.vfcurn {
+  padding-bottom: 1px;
+  background-color: #fcf7f77a;
+}
+
+.reactIcon {
+  width: 50px;
+  height: 30px;
+  padding-right: 10px;
+  padding-left: 15px;
+  color: #505152de;
+}
+
+@media (max-width: 615px) {
+  .FooterContainer .FooterCo {
+    display: none;
+  }
+
+  .footerInnerText .ulFooterText {
+    width: 100%;
+    display: flex;
+    font-size: $font-size13;
+    flex-wrap: wrap;
+    padding-bottom: 9px;
+    padding-top: 12px;
+  }
+
+  .vfcurn p {
+    font-size: $font-size13;
+  }
+}

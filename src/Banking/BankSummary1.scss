@@ -1,0 +1,166 @@
+@import '../Home/variables.scss';
+
+.headerContainer.accountHistory {
+         position: relative;
+}
+
+.ulhead.accountHistory {
+  display: none;
+}
+
+.bankview.accountHistory {
+         display: flex;
+         justify-content: space-between;
+     }
+     
+     .notification.accountHistory {
+         padding-right: 5px;
+         font-size: $font-size15;
+     }
+     
+     .logout.accountHistory {
+         height: 30px;
+     }
+
+.check5334 {
+         justify-content: space-between;
+         display: flex;
+         background-color: #cfcaca79;
+         padding: 15px;
+}
+
+.check5334text {
+         font-size: $font-size18;
+         margin-bottom: 1px;
+}
+
+.backBanksum {
+         cursor: pointer;
+}
+
+.accountHistorySum {
+         display: flex;
+         margin-top: 1px;
+}
+
+.navsumacc {
+         max-width: 30em;
+         min-width: 16em;
+         padding-left: 3em;
+         border: 2px solid #cfcaca79;
+}
+
+.navsumaccText {
+         font-size: $font-size15;
+         padding-right: 25px;
+}
+
+.transhissum {
+         max-width: 60em;
+         padding-left: 3em;
+         margin-right: 30px;
+         padding-bottom: 30px;
+         border: 2px solid #cfcaca79;
+}
+
+.transText {
+         border: 2px solid #cfcaca79;
+         display: flex;
+         justify-content: center;
+         padding: 15px;
+         font-size: $font-size18;
+}
+
+.alltransaction {
+         display: flex;
+         justify-content: space-between;
+         border: 1px solid #ccc;
+         padding-left: 15px;
+         padding-right: 15px;
+         font-weight: 500;
+}
+
+.borderpx {
+         border: 1px solid #ccc;
+         margin-bottom: -2px;
+}
+
+.nopendtext {
+         display: flex;
+         justify-content: center;
+         background-color: #dad2d242;
+         font-weight: 500;
+}
+
+.penpost {
+         border-bottom: 3px solid #ccc;
+         padding-left: 15px;
+         padding-right: 15px;
+         font-size: $font-size22;
+}
+
+.transactDetail {
+         padding-left: 15px;
+         padding-right: 15px;
+         font-weight: 500;
+}
+
+.histext {
+         padding-left: 15px;
+         background-color: #dad2d242;
+         font-weight: 500;
+}
+
+.input-container {
+         display: flex;
+         align-items: center;
+         border: 1px solid #ccc;
+         padding: 5px;
+         border-radius: 5px;
+         width: 100%;
+       }
+       
+       .search-icon {
+         font-size: 1.5rem;
+         margin-right: 5px;
+         color: #666;
+       }
+       
+       .search-input {
+         border: none;
+         outline: none;
+         flex: 1;
+         padding: 5px;
+       }
+       
+
+       .transactDetail {
+         display: flex;
+         justify-content: space-between;
+       }
+
+@media (max-width: 862px) {
+        .navsumacc {
+          display: none;
+        }
+        .transhissum {
+          max-width: 100%;
+          padding-left: 1em;
+          margin-right: 20px;
+        }
+}       
+
+@media (max-width: 762px) {
+        .notification.accountHistory {
+          display: none;
+        }
+        .check5334text {
+          font-size: $font-size13;
+        }
+        .transText {
+          font-size: $font-size13;
+        }
+        .penpost {
+          font-size: $font-size15;
+        }
+}

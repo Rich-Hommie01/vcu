@@ -1,0 +1,189 @@
+@import '../Home/variables.scss';
+
+.homebody {
+  padding-top: 150px;
+  background: $background-main;
+  background: linear-gradient(
+    90deg,
+    rgba(169, 118, 227, 0.9612219887955182) 21%,
+    rgba(131, 99, 147, 0.6446953781512605) 38%,
+    rgba(155, 137, 159, 0.9920343137254902) 78%
+  );
+}
+
+.bankview {
+  display: none;
+}
+
+.HomeLogin {
+  width: 100%;
+}
+
+.SecureLogin {
+  background-color: rgba(245, 245, 220, 0.411);
+  border-radius: 3px;
+  margin-left: 9em;
+  padding-left: 4em;
+  padding-bottom: 20px;
+  max-width: 26rem;
+}
+
+.icon {
+  padding-top: 25px;
+  padding-bottom: 10px;
+  font-size: 30px;
+}
+
+.btn-secondary.secure {
+  height: 50px;
+  width: 13rem;
+  font-size: larger;
+  margin-left: 50px;
+}
+
+.ForgetUserPass {
+  display: block;
+  padding-top: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.ForgetUserPass:hover {
+  color: #0848f8;
+}
+
+.HomeText {
+  background-color: #f8f8f38e;
+  border-radius: 10px;
+  max-width: 100%;
+  margin-top: 190px;
+  margin-left: 50%;
+  padding-left: 25px;
+  padding-right: 12px;
+}
+
+.PersonalLoan {
+  color: #f80808;
+  font-size: clamp(25px, 8vw, 55px);
+  font-weight: 500;
+  padding-top: 15px;
+}
+
+.LoanText {
+  font-size: 20px;
+}
+
+.explore {
+  margin-bottom: 50px;
+  height: 50px;
+}
+
+.PrivateClient {
+  background-color: #ffffff75;
+  display: flex;
+  padding-top: 20px;
+  margin-top: 69px;
+  width: 100%;
+}
+
+.Privatelient {
+  margin-right: 180px;
+  margin-left: 20px;
+  padding-bottom: 20px;
+}
+
+.VirginPC {
+  font-size: 50px;
+}
+
+.VirginPCText {
+  font-size: $font-size20;
+}
+
+@media (max-width: 869px) {
+  .HomeText {
+    margin-left: 1%;
+  }
+  .VirginPC {
+    font-size: 28px;
+  }
+  .PrivateClient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .Privatelient {
+    width: 100%;
+    margin-right: 1px;
+    margin-left: 2px;
+  }
+  .privateCard img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 615px) {
+  .SecureLogin {
+    max-width: 60%;
+    background: $background-main;
+    margin: 1px auto;
+    padding-left: 2em;
+  }
+
+  .icon {
+    padding-top: 25px;
+    padding-bottom: 10px;
+    font-size: 25px;
+  }
+
+  .btn-secondary.secure {
+    max-width: 70%;
+    margin-left: 20px;
+  }
+
+  .VirginPC {
+    font-size: $font-size15;
+  }
+  .PrivateClient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .Privatelient {
+    width: 100%;
+    margin-right: 1px;
+    margin-left: 2px;
+  }
+  .privateCard img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .SecureLogin {
+    max-width: 70%;
+    background: $background-main;
+    margin: 1px auto;
+    padding-left: 2em;
+  }
+
+  .icon {
+    padding-top: 25px;
+    padding-bottom: 10px;
+    font-size: $font-size20;
+  }
+
+  .btn-secondary.secure {
+    max-width: 70%;
+    margin-left: 20px;
+    font-size: $font-size15;
+  }
+}
+

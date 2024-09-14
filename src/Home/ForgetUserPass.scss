@@ -1,0 +1,35 @@
+@import '../Home/variables.scss';
+
+.headerContainer.forgetuser {
+         display: flex;
+}
+
+.logoContainer.forgetuser {
+         display: flex;
+         margin: 1px auto;
+         padding-left: 15em;
+}
+
+.ulhead.forgetuser {
+         display: none;
+}
+
+.faquser {
+         display: flex;
+         margin-top: 5em;
+}
+
+.FAQsExit {
+         width: 25em;
+         text-align: right;
+         padding-right: 4em;
+}
+
+.quest {
+         padding-right: 50px;
+}
+
+.faqsExit {
+      font-size: $font-size15;
+      right: 0;
+}
