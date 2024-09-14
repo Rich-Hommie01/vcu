@@ -117,24 +117,11 @@ const Register = () => {
       {step === 1 && (
         <div>
           <h3>Personal Details</h3>
-          <input
-            type="text"
-            name="firstname"
-            placeholder="First Name"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="middlename"
-            placeholder="Middle Name (Optional)"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
+          
           <input
             type="text"
             name="lastname"
-            placeholder="Last Name"
+            placeholder="Name"
             value={formData.name}
             onChange={handleInputChange}
           />
