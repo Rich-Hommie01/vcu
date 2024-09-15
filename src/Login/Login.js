@@ -7,42 +7,35 @@ import Footer from "../HomePage/Footer";
 import { useAuth } from "../auth/AuthProvider";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
 
     try {
+      // Login attempt without MFA
       const response = await axios.post(
-        "https://backend-0j4l.onrender.com/api/auth/login",
-        {
-          email,
-          password,
-        }
+        "https://backend-9uk7.onrender.com/api/auth/login",
+        { username, password }
       );
 
-      // Assuming the response contains a token and user info
-      const token = response.data.token;
-      const user = response.data.user;
-
-      // Handle successful login
-      login(token);
-
-      // Store the user information in localStorage to persist it
-    localStorage.setItem("user", JSON.stringify({
-      name: user.name,
-      lastLogin: user.lastLogin,
-    }));
-
-    // Redirect to BankHome
-    navigate("/bankHome");
-    
-  } catch (error) {
-      // Handle login failure
+      if (response.data.success) {
+        const token = response.data.token;
+        const user = response.data.user;
+        login(token);
+        localStorage.setItem("user", JSON.stringify({
+          name: user.name,
+          lastLogin: user.lastLogin,
+        }));
+        navigate("/bankHome");
+      } else {
+        setError("Invalid credentials. Please try again.");
+      }
+    } catch (error) {
       console.error("Login failed:", error);
       setError("Invalid credentials. Please try again.");
     }
@@ -56,18 +49,19 @@ const Login = () => {
           <h3 className="text-center mb-4">Sign In to Continue</h3>
           <form onSubmit={handleSubmit} className="login-form">
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="username" className="form-label">
                 Username
               </label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
+
             <div className="mb-3">
               <label htmlFor="password" className="form-label">
                 Password
@@ -81,7 +75,9 @@ const Login = () => {
                 required
               />
             </div>
+
             {error && <p className="error">{error}</p>}
+
             <button type="submit" className="btn btn-primary w-100">
               Login
             </button>
