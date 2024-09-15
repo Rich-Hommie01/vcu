@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://backend-grdx.onrender.com/api/auth/login",
+        "https://backend-9uk7.onrender.com/api/auth/login",
         { username, password }
       );
 
