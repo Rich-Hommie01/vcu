@@ -10,16 +10,18 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // Track loading state
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null);
+    setLoading(true); // Set loading to true when login starts
 
     try {
-      // Login attempt without MFA
       const response = await axios.post(
-        "https://backend-9uk7.onrender.com/api/auth/login",
+        "https://backend-grdx.onrender.com/api/auth/login",
         { username, password }
       );
 
@@ -38,6 +40,8 @@ const Login = () => {
     } catch (error) {
       console.error("Login failed:", error);
       setError("Invalid credentials. Please try again.");
+    } finally {
+      setLoading(false); // Stop loading when request is done
     }
   };
 
@@ -59,6 +63,7 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                disabled={loading} // Disable input while loading
               />
             </div>
 
@@ -73,14 +78,20 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={loading} // Disable input while loading
               />
             </div>
 
             {error && <p className="error">{error}</p>}
 
-            <button type="submit" className="btn btn-primary w-100">
-              Login
-            </button>
+            {/* Display loading indicator */}
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <button type="submit" className="btn btn-primary w-100">
+                Login
+              </button>
+            )}
           </form>
         </div>
       </div>
