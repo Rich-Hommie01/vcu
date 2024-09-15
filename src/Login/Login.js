@@ -5,19 +5,20 @@ import Navbar from "../HomePage/Navbar";
 import "./Login.scss";
 import Footer from "../HomePage/Footer";
 import { useAuth } from "../auth/AuthProvider";
+import { Spinner } from 'react-bootstrap';  // Import Spinner from Bootstrap
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null);
-    setLoading(true); // Set loading to true when login starts
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -41,7 +42,7 @@ const Login = () => {
       console.error("Login failed:", error);
       setError("Invalid credentials. Please try again.");
     } finally {
-      setLoading(false); // Stop loading when request is done
+      setLoading(false);
     }
   };
 
@@ -84,9 +85,12 @@ const Login = () => {
 
             {error && <p className="error">{error}</p>}
 
-            {/* Display loading indicator */}
             {loading ? (
-              <p>Loading...</p>
+              <div className="d-flex justify-content-center">
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
             ) : (
               <button type="submit" className="btn btn-primary w-100">
                 Login
