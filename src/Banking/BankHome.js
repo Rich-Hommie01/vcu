@@ -15,7 +15,7 @@ import { FaMoneyBillTransfer } from "react-icons/fa6"
 // Function to update balance by calling the backend API
 const updateBalance = async (userId, amount) => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/balance", {
+    const response = await fetch("https://backend-av3s.onrender.com/api/auth/balance", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -114,10 +114,10 @@ const BankHome = () => {
         </div>
         <div className='premiumcheckmobile'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
         <p className='Balc'>Available ........................................ **${formattedBalance}</p>
-        <p className='Balc'>Current ............................................. $${formattedBalance}</p>
+        <p className='Balc'>Current ............................................. ${formattedBalance}</p>
         </div>
         <div className='premiumcheckSmallmobile'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
-        <p className='Balc'>Available ............................. **$${formattedBalance}</p>
+        <p className='Balc'>Available ............................. **${formattedBalance}</p>
         <p className='Balc'>Current ................................. ${formattedBalance}</p>
         </div>
         <p className='BalAcc'  onClick={() => navigate('/bankSummary2')}>REGULAR SHARE SAVINGS (2543)</p>
