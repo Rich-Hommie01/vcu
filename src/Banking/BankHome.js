@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../HomePage/Navbar'
 import './BankHome.scss'
 import image from '../img/fraud.jpg'
@@ -12,35 +12,77 @@ import { TbReportMoney } from "react-icons/tb"
 import { MdManageHistory } from "react-icons/md"
 import { FaMoneyBillTransfer } from "react-icons/fa6"
 
-const BankHome = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  
-  // Extract name and lastLogin from location.state if available
-  const { name: locationName, lastLogin: locationLastLogin } = location.state || {};
+// Function to update balance by calling the backend API
+const updateBalance = async (userId, amount) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/balance", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId, amount }), // Send userId and amount to the backend
+    });
 
-  // State to hold user information
-  const [user, setUser] = useState({
-    name: locationName || "",
-    lastLogin: locationLastLogin || "",
-  });
+    const data = await response.json();
+    if (data.success) {
+      return data.balance;
+    } else {
+      console.error("Failed to update balance:", data.message);
+    }
+  } catch (error) {
+    console.error("Error updating balance:", error);
+  }
+};
+
+const BankHome = () => {
+  const [balance, setBalance] = useState(0);
+  const [user, setUser] = useState({ name: "", lastLogin: "", id: "" });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user data is missing and retrieve from localStorage
-    if (!user.name || !user.lastLogin) {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (storedUser) {
-        setUser({
-          name: storedUser.name,
-          lastLogin: storedUser.lastLogin,
-        });
-      } else {
-        // If no user data is available, redirect to login
-        navigate("/login");
-      }
+    // Retrieve user data from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser({
+        name: storedUser.name,
+        lastLogin: storedUser.lastLogin,
+        balance: storedUser.balance || 0,
+        id: storedUser.id, // Ensure ID is set
+      });
+      setBalance(storedUser.balance || 0);
+    } else {
+      navigate("/login");
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
+  // Format balance for display
+  const formattedBalance = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(balance);
+
+  const handleTransaction = async (amount) => {
+    try {
+      // Log the current user ID and amount for debugging
+      console.log('User ID:', user.id);
+      console.log('Amount:', amount);
+  
+      const updatedBalance = await updateBalance(user.id, amount);
+  
+      // Check if updatedBalance is received
+      if (updatedBalance !== undefined) {
+        setBalance(updatedBalance);
+        const updatedUser = { ...user, balance: updatedBalance };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+      } else {
+        console.error("Failed to update balance");
+      }
+    } catch (error) {
+      console.error("Error handling transaction:", error);
+    }
+  };
+  
   return (
     <>
       <header><Navbar className={BankHome} /></header>
@@ -52,6 +94,10 @@ const BankHome = () => {
         <button className='accountText'>Rewards & Deals</button>
         <button className='accountText'>Security Center</button>
         <button className='accountText'>Open an Account</button>
+        <div className="transaction-buttons">
+        <button onClick={() => handleTransaction(100)}>Add $100</button>
+        <button onClick={() => handleTransaction(100.55)}>Add $100.55</button>
+      </div>
       </div>
       <div className='userUpdate'>
       <h3 className='welcome'>Welcome, {user.name}!</h3>
@@ -61,18 +107,18 @@ const BankHome = () => {
     <div className='accBal'>
       <div className='Bal'>
         <h2 className='Acc'>Bank Accounts <span className='transfer'>Transfer <FaMoneyBillTransfer /></span></h2>
-        <p className='BalAcc'  onClick={() => navigate('/bankSummary1')}>MYCHOICE PREMIUM CHECKING (5334)</p>
-        <div className='premiumcheck'  onClick={() => navigate('/bankSummary1')}>
-        <p className='Balc'>Available ........................................................ **$765,900.94</p>
-        <p className='Balc'>Current ............................................................. $765,900.94</p>
+        <p className='BalAcc'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>MYCHOICE PREMIUM CHECKING (5334)</p>
+        <div className='premiumcheck'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
+        <p className='Balc'>Available ........................................................ **${formattedBalance}</p>
+        <p className='Balc'>Current ............................................................. ${formattedBalance}</p>
         </div>
-        <div className='premiumcheckmobile'  onClick={() => navigate('/bankSummary1')}>
-        <p className='Balc'>Available ........................................ **$765,900.94</p>
-        <p className='Balc'>Current ............................................. $765,900.94</p>
+        <div className='premiumcheckmobile'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
+        <p className='Balc'>Available ........................................ **${formattedBalance}</p>
+        <p className='Balc'>Current ............................................. $${formattedBalance}</p>
         </div>
-        <div className='premiumcheckSmallmobile'  onClick={() => navigate('/bankSummary1')}>
-        <p className='Balc'>Available ............................. **$765,900.94</p>
-        <p className='Balc'>Current ................................. $765,900.94</p>
+        <div className='premiumcheckSmallmobile'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
+        <p className='Balc'>Available ............................. **$${formattedBalance}</p>
+        <p className='Balc'>Current ................................. ${formattedBalance}</p>
         </div>
         <p className='BalAcc'  onClick={() => navigate('/bankSummary2')}>REGULAR SHARE SAVINGS (2543)</p>
         <div className='premiumcheck'  onClick={() => navigate('/bankSummary2')}>
@@ -88,9 +134,9 @@ const BankHome = () => {
         <p className='Balc'>Current ........................................ $0.00</p>
         </div>
         <h2 className='BalTo'>BALANCE TOTALS</h2>
-        <p className='totaldepo'>Total Deposit Accounts ................................. $765,900.94</p>
-        <p className='totaldepomobile'>Total Deposit Accounts .................... $765,900.94</p>
-        <p className='totaldepoSmallmobile'>Total Deposit Accounts ............ $765,900.94</p>
+        <p className='totaldepo'>Total Deposit Accounts ................................. ${formattedBalance}</p>
+        <p className='totaldepomobile'>Total Deposit Accounts .................... ${formattedBalance}</p>
+        <p className='totaldepoSmallmobile'>Total Deposit Accounts ............ ${formattedBalance}</p>
         <p className='BalAc'>**This balance may include overdraft or line of credit funds.</p>
       </div>
       <div className='billPayment'>

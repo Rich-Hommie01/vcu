@@ -1,191 +1,172 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Navbar from '../HomePage/Navbar';
+// Register.js
+import React, { useState } from 'react';
+import IntroContent from './IntroContent';
+import StepOne from './StepOne';
+import StepTwo from './StepTwo';
+import StepThree from './StepThree';
+import StepFour from './StepFour';
+import StepFive from './StepFive';
 import ProgressBar from './ProgressBar';
-import './Register.scss'; // For SCSS styling
+import './Register.scss';
 
 const Register = () => {
-  const [step, setStep] = useState(0);
-  const [otp, setOtp] = useState("");
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    address: "",
-    dob: "",
-    phone: "+1",
+    username: '',
+    password: '',
+    name: '',
+    address: '',
+    dob: '',
+    ssn: '',
+    phone: '',
+    email: ''
   });
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [showFinalContent, setShowFinalContent] = useState(false);
-  const navigate = useNavigate();
+  const handleNextStep = () => {
+    if (validateStep()) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
 
-  // Handle form input changes
-  const handleInputChange = (e) => {
+  const handlePreviousStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const handleStart = () => {
+    setCurrentStep(1); // Move to the first step of the form
+  };
+
+  const validateStep = () => {
+    let newErrors = {};
+    switch (currentStep) {
+      case 1:
+        if (!formData.username || !formData.password) {
+          newErrors.username = !formData.username ? 'Username is required' : '';
+          newErrors.password = !formData.password ? 'Password is required' : '';
+        }
+        break;
+      case 2:
+        if (!formData.name || !formData.address) {
+          newErrors.name = !formData.name ? 'Name is required' : '';
+          newErrors.address = !formData.address ? 'Address is required' : '';
+        }
+        break;
+      case 3:
+        if (!formData.dob) {
+          newErrors.dob = 'Date of birth is required';
+        }
+        break;
+      case 4:
+        if (!/^\d{9}$/.test(formData.ssn)) {
+          newErrors.ssn = 'SSN must be exactly 9 digits';
+        }
+        if (!/^\d{10}$/.test(formData.phone)) {
+          newErrors.phone = 'Phone number must be exactly 10 digits';
+        }
+        break;
+      case 5:
+        if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          newErrors.email = 'Invalid email format';
+        }
+        break;
+      default:
+        break;
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
 
-  // Handle phone input changes
-  const handlePhoneInputChange = (e) => {
-    let newValue = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
-    if (!newValue.startsWith("1")) {
-      newValue = "1" + newValue; // Ensure the phone starts with "1"
-    }
-    setFormData({ ...formData, phone: `+${newValue}` });
-  };
-
-  // Move to the next step
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
-
-  // Step-specific text for the progress bar
-  const stepText = {
-    1: "Please provide your personal details",
-    2: "Enter your address and date of birth",
-    3: "Verify your phone number with the OTP",
-    4: "Review and submit your information",
-  };
-
-  // OTP Verification
-  const handleOtpVerification = async () => {
-    try {
-      await axios.post("/api/verify-otp", { otp, phone: formData.phone });
-      nextStep();
-    } catch (error) {
-      console.error("OTP Verification failed:", error);
-    }
-  };
-
-  // Final form submission
   const handleSubmit = async () => {
+    setIsLoading(true);
     try {
-      await axios.post("/api/submit-form", formData);
-      setShowFinalContent(true);
+      const response = await fetch('https://backend-av3s.onrender.com/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Redirect to success page
+        setTimeout(() => {
+          window.location.href = '/success'; // Redirect to success page
+        }, 1000);
+      } else {
+        const errorData = await response.json();
+        console.error('Error:', errorData);
+        setErrors({ submit: errorData.message || 'An error occurred during submission. Please try again.' });
+      }
     } catch (error) {
-      console.error("Form submission failed:", error);
+      console.error('Error:', error);
+      setErrors({ submit: 'An unexpected error occurred. Please try again.' });
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  const totalSteps = 4; // Total form steps
 
   return (
-    <>
-      <Navbar className="nav-container" />
-      <div className="form-container">
-        {/* Conditionally render ProgressBar only during form steps (1 to 4) */}
-        {step > 0 && step <= totalSteps && (
-          <ProgressBar step={step} totalSteps={4} stepText={stepText[step]} />
-        )}
+    <div className="container">
+      {currentStep === 0 && <IntroContent onStart={handleStart} />}
+      {currentStep > 0 && <ProgressBar currentStep={currentStep} totalSteps={5} />}
 
-        {/* Introductory content (no progress bar) */}
-        {step === 0 && (
-          <div>
-            <h2>Let's open your VFCU Private Client Checking℠ account</h2>
-            <div>
-              <p>Before you start, you'll need your:</p>
-              <ul>
-                <li>Social Security number</li>
-                <li>Driver's license or state ID</li>
-              </ul>
-              <p>You can only open individual accounts online. To add a joint owner, schedule a meeting to talk with a VFCU banker in person.</p>
-            </div>
-            <h2>Are you an existing VFCU customer?</h2>
-            <p>If you're a VFCU customer, sign in for faster, prefilled application.</p>
-            <button onClick={() => navigate("/login")}>Yes, sign in now</button>
-            <button onClick={nextStep}>Start Registration</button>
-          </div>
-        )}
-
-        {/* Step 1: Personal Details */}
-        {step === 1 && (
-          <div>
-            <h3>Personal Details</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            <div style={{ position: "relative" }}>
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone} // Display the full value including +1
-                onChange={handlePhoneInputChange}
-                style={{ paddingLeft: "0.5em" }}
-              />
-            </div>
-            <button onClick={nextStep}>Next</button>
-          </div>
-        )}
-
-        {/* Step 2: Address & DOB */}
-        {step === 2 && (
-          <div>
-            <h3>Address & Date of Birth</h3>
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={formData.address}
-              onChange={handleInputChange}
-            />
-            <input
-              type="date"
-              name="dob"
-              value={formData.dob}
-              onChange={handleInputChange}
-            />
-            <button onClick={prevStep}>Back</button>
-            <button onClick={nextStep}>Next</button>
-          </div>
-        )}
-
-        {/* Step 3: OTP Verification */}
-        {step === 3 && (
-          <div>
-            <h3>OTP Verification</h3>
-            <p>We have sent an OTP to your phone number: {formData.phone}</p>
-            <input
-              type="text"
-              name="otp"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-            <button onClick={prevStep}>Back</button>
-            <button onClick={handleOtpVerification}>Verify OTP</button>
-          </div>
-        )}
-
-        {/* Step 4: Review & Submit */}
-        {step === 4 && (
-          <div>
-            <h3>Review & Submit</h3>
-            <p>Please review your details before submitting.</p>
-            <button onClick={prevStep}>Back</button>
-            <button onClick={handleSubmit}>Submit</button>
-          </div>
-        )}
-
-        {/* Final content after submission */}
-        {showFinalContent && (
-          <div>
-            <h2>Form Submitted</h2>
-            <p>Thank you for registering!</p>
-          </div>
-        )}
-      </div>
-    </>
+      {currentStep === 1 && (
+        <StepOne
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+          handleNextStep={handleNextStep}
+        />
+      )}
+      {currentStep === 2 && (
+        <StepTwo
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+          handleNextStep={handleNextStep}
+          handlePreviousStep={handlePreviousStep}
+        />
+      )}
+      {currentStep === 3 && (
+        <StepThree
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+          handleNextStep={handleNextStep}
+          handlePreviousStep={handlePreviousStep}
+        />
+      )}
+      {currentStep === 4 && (
+        <StepFour
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+          handleNextStep={handleNextStep}
+          handlePreviousStep={handlePreviousStep}
+        />
+      )}
+      {currentStep === 5 && (
+        <StepFive
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+          handleSubmit={handleSubmit}
+          handlePreviousStep={handlePreviousStep}
+          isLoading={isLoading}
+        />
+      )}
+      {errors.submit && <p className="error-message">{errors.submit}</p>}
+    </div>
   );
 };
 

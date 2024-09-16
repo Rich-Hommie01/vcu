@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import Navbar  from '../HomePage/Navbar'
 import './BankSummary1.scss'
 import { IoArrowBackCircleOutline, IoChevronForward } from "react-icons/io5"
@@ -9,6 +10,16 @@ import { RiQuestionFill } from "react-icons/ri"
 
 const BankSummary1 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { balance } = location.state || { balance: 0 };
+
+  // Format balance to include commas and two decimal places
+  const formattedBalance = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(balance);
+  
   return (
     <div >
       <Navbar className="accountHistory" />
@@ -26,7 +37,7 @@ const BankSummary1 = () => {
             <p className='check5334text'>x5334</p>
             <p className='check5334text backBanksum' onClick={() => navigate('/bankHome')}> <IoArrowBackCircleOutline /> Return to Account Summary</p>
           </div>
-            <p className='check5334text'>Available Balance: <span>$765,900.94</span></p>
+            <p className='check5334text'>Available Balance: <span>${formattedBalance}</span></p>
         </div>
         <div className='accountHistorySum'>
           <div className='navsumacc'>
@@ -57,10 +68,8 @@ const BankSummary1 = () => {
         </div>
         <div className='borderpx'>
           <h2 className='borderpx penpost'>POSTED</h2>
-          <p className='transactDetail borderpx'>jul 26 <span>$765,900.94</span></p>
+          <p className='transactDetail borderpx'>jul 26 <span>${formattedBalance}</span></p>
           <p className='borderpx histext'>Online scheduled transfer from CHK 4924 Confirmation# xxxxx90304</p>
-          <p className='transactDetail borderpx'>jul 01 <span>$400</span></p>
-          <p className='borderpx histext'>Deposit</p>
         </div>
         </div>
         </div>

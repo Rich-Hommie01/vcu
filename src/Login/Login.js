@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://backend-9uk7.onrender.com/api/auth/login",
+        "https://backend-av3s.onrender.com/api/auth/login",
         { username, password }
       );
 
@@ -31,8 +31,10 @@ const Login = () => {
         const user = response.data.user;
         login(token);
         localStorage.setItem("user", JSON.stringify({
+          id: user.id,
           name: user.name,
           lastLogin: user.lastLogin,
+          balance: user.balance,
         }));
         navigate("/bankHome");
       } else {

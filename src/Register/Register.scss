@@ -1,0 +1,133 @@
+// Register.scss
+$primary-color: #007bff;
+$success-color: #28a745;
+$error-color: #dc3545;
+$light-grey: #f8f9fa;
+$border-radius: 5px;
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  max-width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: $light-grey;
+  border-radius: $border-radius;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-step {
+  width: 100%;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+}
+
+.progress-bar-container {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: $border-radius;
+  margin: 0 10px;
+  overflow: hidden;
+
+  .progress {
+    height: 100%;
+    width: 0;
+    background-color: $primary-color;
+    border-radius: $border-radius;
+    transition: width 0.4s ease;
+  }
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.progress-step {
+  flex-basis: 100%;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+  font-size: 1rem;
+}
+
+button {
+  background-color: $primary-color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.error-message {
+  color: $error-color;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: $success-color;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.success-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f6f8;
+  border-radius: $border-radius;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid $primary-color;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
