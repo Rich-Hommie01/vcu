@@ -29,7 +29,7 @@ const Body = () => {
               Secure Log in
             </button>
             <span className="ForgetUserPass" onClick={() => navigate('/forgetUserPass')}>Forget username / Password?</span>
-            <span className="ForgetUserPass">Enroll in Online Banking</span>
+            <span className="ForgetUserPass" onClick={() => navigate('/register')}>Enroll in Online Banking</span>
           </div>
         </section>
         <article className="HomeText">
