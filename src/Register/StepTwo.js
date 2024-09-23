@@ -4,7 +4,7 @@ import React from 'react';
 const StepTwo = ({ formData, handleChange, errors, handleNextStep, handlePreviousStep }) => {
   return (
     <div className="form-step">
-      <h2>Step 2: Name & Address</h2>
+      <h2>Name & Address</h2>
       <input
         type="text"
         name="name"

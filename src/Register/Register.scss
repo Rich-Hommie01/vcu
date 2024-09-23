@@ -1,19 +1,23 @@
-// Register.scss
+@import '../Home/variables.scss';
+
 $primary-color: #007bff;
 $success-color: #28a745;
 $error-color: #dc3545;
-$light-grey: #f8f9fa;
 $border-radius: 5px;
 
-body {
-  font-family: 'Arial', sans-serif;
+.headerContainer.NavRegister {
+  position: relative;
+}
+
+.ulhead.NavRegister {
+  display: none;
 }
 
 .container {
-  max-width: 100%;
+  max-width: 70%;
   padding: 20px;
   margin: 0 auto;
-  background-color: $light-grey;
+  background-color: $background-color;
   border-radius: $border-radius;
 }
 
@@ -71,6 +75,46 @@ body {
   font-size: 0.8rem;
 }
 
+.TaxId {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  font-weight: 500;
+}
+
+.TaxIdcon {
+  margin: 20px;
+}
+
+.form-step button {
+  margin-right: 20px;
+}
+
+.back-to-login {
+  margin-right: 50px;
+  margin-bottom: 20px;
+}
+
+.checkbox-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.checkbox-container label {
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+#myCheckbox {
+  width: 25px;
+  height: 30px;
+}
+
 input {
   width: 100%;
   padding: 10px;
@@ -81,13 +125,10 @@ input {
 }
 
 button {
-  background-color: $primary-color;
+  background-color: $main-btn-color;
   color: white;
-  padding: 10px 20px;
   border: none;
   border-radius: $border-radius;
-  font-size: 1.2rem;
-  cursor: pointer;
 
   &:disabled {
     background-color: #ccc;
@@ -130,4 +171,14 @@ button {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 520px)  {
+  .container {
+   max-width: 100%;
+  }
+  .form-step button {
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
 }

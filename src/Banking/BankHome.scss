@@ -7,14 +7,19 @@
     display: none;
 }
 
-.title.BankHome, .head-title.BankHome {
-    font-size: $font-size20;
+.title.BankHome {
+    font-size: 13px;
     font-weight: 700;
     color: #333;
-  }
+}
+
+.head-title.BankHome {
+    font-size: 16px;
+}
 
   .logo.BankHome {
     margin-right: -5px;
+    margin-left: -15px;
   }
 
 .h1 {
@@ -27,11 +32,12 @@
     padding-left: 10px;
 }
 
-.accountText {
+.accountBtn {
     margin-right: 2px;
     margin-top: 2px;
     width: 10em;
     height: 37px;
+    background-color: $main-btn-color;
     border: #33333328;
     border-radius: 3px;
     font-weight: 500;
@@ -50,12 +56,14 @@
 
 .lastlog {
     font-size: $font-size15;
+    font-weight: $font-weight;
 }
 
 .accBal {
     display: flex;
     flex-wrap: wrap;
     margin-top: 19px;
+    background-color: $background-color;
 }
 
 .Bal {
@@ -80,6 +88,11 @@
 .transfer {
     font-size: $font-size15;
     cursor: pointer;
+    border-radius: 5px;
+    height: 30px;
+    padding: 7px;
+    color: #d7dadd;
+    background-color: $main-btn-color;
 }
 
 .BalAcc {
@@ -280,6 +293,10 @@
     max-width: 8em;
 }
 
+.fdic {
+    background-color: $background-color;
+}
+
 .vfcuinvest {
     height: 50px;
     background-color: rgba(188, 154, 228, 0.568);
@@ -350,11 +367,6 @@
     display: none;
 }
 
-@media (max-width: 915px) {
-    .title.BankHome {
-      font-size: 20px;
-    }
-  }
 @media (max-width: 762px) {
     .notification.BankHome {
       display: none;

@@ -4,7 +4,7 @@ import React from 'react';
 const StepFour = ({ formData, handleChange, errors, handleNextStep, handlePreviousStep }) => {
   return (
     <div className="form-step">
-      <h2>Step 4: SSN & Phone Number</h2>
+      <h2>Social Security Number & Phone Number</h2>
       <input
         type="text"
         name="ssn"

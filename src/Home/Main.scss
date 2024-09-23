@@ -25,12 +25,12 @@
 }
 
 .logo {
-  height: 7vh;
+  height: 6vh;
   margin-right: 10px;
 }
 
 .title {
-  font-size: 22px;
+  font-size: 13px;
   font-weight: 700;
   color: #333;
   margin: 0;
@@ -39,11 +39,11 @@
 
 .head-title {
   display: block;
+  font-size: 16px;
 }
 
 .navContainer {
-  margin-left: auto; /* Aligns the navContainer to the right */
-  height: 60px;
+  margin-left: auto; 
 }
 
 .navContainer ul {
@@ -57,7 +57,7 @@
   cursor: pointer;
   padding: 8px 8px;
   transition: background-color 0.3s;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -109,7 +109,7 @@
   height: 50px;
 }
 
-@media (max-width: 1269px) {
+@media (max-width: 1059px) {
   .headerContainer {
     max-width: 81rem;
   }

@@ -1,4 +1,3 @@
-// ProgressBar.js
 import React from 'react';
 import './ProgressBar.scss';
 
@@ -8,7 +7,7 @@ const ProgressBar = ({ currentStep, totalSteps }) => {
   return (
     <div className="progress-container">
       <div className="progress-bar" style={{ width: `${percentage}%` }}>
-        {currentStep}/{totalSteps} Steps Completed
+        {currentStep}/{totalSteps} Steps
       </div>
     </div>
   );

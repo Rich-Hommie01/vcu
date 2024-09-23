@@ -1,4 +1,3 @@
-// Register.js
 import React, { useState } from 'react';
 import IntroContent from './IntroContent';
 import StepOne from './StepOne';
@@ -7,6 +6,7 @@ import StepThree from './StepThree';
 import StepFour from './StepFour';
 import StepFive from './StepFive';
 import ProgressBar from './ProgressBar';
+import NavBar from '../HomePage/Navbar';
 import './Register.scss';
 
 const Register = () => {
@@ -19,7 +19,12 @@ const Register = () => {
     dob: '',
     ssn: '',
     phone: '',
-    email: ''
+    email: '',
+    terms: false,
+    notifications: false,
+    idCardNumber: '', 
+    idExpirationDate: '', 
+    stateIdType: '', 
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +75,21 @@ const Register = () => {
         if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
           newErrors.email = 'Invalid email format';
         }
+        if (!formData.terms) {
+          newErrors.terms = 'Required!';
+        }
+        if (!formData.notifications) {
+          newErrors.notifications = 'Required!';
+        }
+        if (!formData.idCardNumber) {
+          newErrors.idCardNumber = 'ID card number is required';
+        }
+        if (!formData.idExpirationDate) {
+          newErrors.idExpirationDate = 'ID expiration date is required';
+        }
+        if (!formData.stateIdType) {
+          newErrors.stateIdType = 'State ID type is required';
+        }
         break;
       default:
         break;
@@ -79,94 +99,97 @@ const Register = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, type, checked, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value,
     });
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('https://backend-av3s.onrender.com/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    if (validateStep()) {
+      setIsLoading(true);
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
 
-      if (response.ok) {
-        // Redirect to success page
-        setTimeout(() => {
-          window.location.href = '/success'; // Redirect to success page
-        }, 1000);
-      } else {
-        const errorData = await response.json();
-        console.error('Error:', errorData);
-        setErrors({ submit: errorData.message || 'An error occurred during submission. Please try again.' });
+        if (response.ok) {
+          // Redirect to success page
+          setTimeout(() => {
+            window.location.href = '/success'; // Redirect to success page
+          }, 1000);
+        } else {
+          const errorData = await response.json();
+          setErrors({ submit: errorData.message || 'An error occurred during submission. Please try again.' });
+        }
+      } catch (error) {
+        setErrors({ submit: 'An unexpected error occurred. Please try again.' });
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('Error:', error);
-      setErrors({ submit: 'An unexpected error occurred. Please try again.' });
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
-    <div className="container">
-      {currentStep === 0 && <IntroContent onStart={handleStart} />}
-      {currentStep > 0 && <ProgressBar currentStep={currentStep} totalSteps={5} />}
+    <>
+      <NavBar className="NavRegister" />
+      <div className="container">
+        {currentStep === 0 && <IntroContent onStart={handleStart} />}
+        {currentStep > 0 && <ProgressBar currentStep={currentStep} totalSteps={5} />}
 
-      {currentStep === 1 && (
-        <StepOne
-          formData={formData}
-          handleChange={handleChange}
-          errors={errors}
-          handleNextStep={handleNextStep}
-        />
-      )}
-      {currentStep === 2 && (
-        <StepTwo
-          formData={formData}
-          handleChange={handleChange}
-          errors={errors}
-          handleNextStep={handleNextStep}
-          handlePreviousStep={handlePreviousStep}
-        />
-      )}
-      {currentStep === 3 && (
-        <StepThree
-          formData={formData}
-          handleChange={handleChange}
-          errors={errors}
-          handleNextStep={handleNextStep}
-          handlePreviousStep={handlePreviousStep}
-        />
-      )}
-      {currentStep === 4 && (
-        <StepFour
-          formData={formData}
-          handleChange={handleChange}
-          errors={errors}
-          handleNextStep={handleNextStep}
-          handlePreviousStep={handlePreviousStep}
-        />
-      )}
-      {currentStep === 5 && (
-        <StepFive
-          formData={formData}
-          handleChange={handleChange}
-          errors={errors}
-          handleSubmit={handleSubmit}
-          handlePreviousStep={handlePreviousStep}
-          isLoading={isLoading}
-        />
-      )}
-      {errors.submit && <p className="error-message">{errors.submit}</p>}
-    </div>
+        {currentStep === 1 && (
+          <StepOne
+            formData={formData}
+            handleChange={handleChange}
+            errors={errors}
+            handleNextStep={handleNextStep}
+          />
+        )}
+        {currentStep === 2 && (
+          <StepTwo
+            formData={formData}
+            handleChange={handleChange}
+            errors={errors}
+            handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        )}
+        {currentStep === 3 && (
+          <StepThree
+            formData={formData}
+            handleChange={handleChange}
+            errors={errors}
+            handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        )}
+        {currentStep === 4 && (
+          <StepFour
+            formData={formData}
+            handleChange={handleChange}
+            errors={errors}
+            handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        )}
+        {currentStep === 5 && (
+          <StepFive
+            formData={formData}
+            handleChange={handleChange}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            handlePreviousStep={handlePreviousStep}
+            isLoading={isLoading}
+          />
+        )}
+        {errors.submit && <p className="error-message">{errors.submit}</p>}
+      </div>
+    </>
   );
 };
 

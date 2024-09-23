@@ -1,0 +1,114 @@
+@import '../Home/variables.scss';
+
+.headerContainer.forgetuser {
+  display: block;
+  position: relative;
+}
+
+.navToggle.forgetuser {
+  display: none;
+}
+
+.ulhead.forgetuser {
+  display: none;
+}
+
+.faquser {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5em;
+}
+
+.left-side {
+  text-align: right;
+  padding-right: 4em;
+  padding-left: 15px;
+}
+
+.quest {
+  padding-right: 50px;
+}
+
+.faqsExit {
+  width: 10em;
+  font-size: $font-size15;
+  right: 0;
+  cursor: pointer;
+}
+ 
+
+.identification, .form-authForm{
+  margin-left: 50px;
+  padding-right: 20px;
+}
+
+.form-authForm {
+  max-width: 20em;
+}
+
+.submit-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: $main-btn-color;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+.password-input-container,
+.username-input-container {
+  position: relative;
+  font-weight: 500;
+
+  input {
+    border: none;
+    border-bottom: 2px solid #007BFF;
+    outline: none;
+    padding: 10px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+
+    &:focus {
+      border-bottom: 2px solid #0056b3; // Change border color on focus (optional)
+    }
+  }
+
+  .toggle-password-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #007BFF;
+
+    &:focus {
+      outline: none; // Remove focus outline for the button
+    }
+  }
+}
+
+// Error message styling
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+
+@media (max-width: 620px) {
+  .faqsExit {
+    width: 10em;
+  }
+  .left-side {
+    display: none;
+  }
+  .right-side {
+    padding-left: 10px;
+  }
+}

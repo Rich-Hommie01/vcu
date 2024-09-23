@@ -94,7 +94,7 @@ const Login = () => {
                 </Spinner>
               </div>
             ) : (
-              <button type="submit" className="btn btn-primary w-100">
+              <button type="submit" className="btn btn-primary w-100 loginBtn">
                 Login
               </button>
             )}

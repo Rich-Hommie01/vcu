@@ -8,7 +8,7 @@ import { AuthProvider } from "./auth/AuthProvider";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import BankSummary1 from './Banking/BankSummary1'
 import BankSummary2 from './Banking/BankSummary2'
-import ForgetUserPass from './Home/ForgetUserPass'
+import ForgetUserPass from './ResetAccount/ForgetUserPass'
 import SuccessPage from './Register/SuccessPage';
 
 const App = () => {

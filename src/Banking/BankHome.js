@@ -88,15 +88,15 @@ const BankHome = () => {
       <header><Navbar className={BankHome} /></header>
       <h1 className='h1'>Home</h1>
       <div className='account'>
-        <button className='accountText'>Accounts</button>
-        <button className='accountText'>Bill Pay</button>
-        <button className='accountText'>Tools & Investing</button>
-        <button className='accountText'>Rewards & Deals</button>
-        <button className='accountText'>Security Center</button>
-        <button className='accountText'>Open an Account</button>
+        <button className='accountBtn'>Accounts</button>
+        <button className='accountBtn'>Bill Pay</button>
+        <button className='accountBtn'>Tools & Investing</button>
+        <button className='accountBtn'>Rewards & Deals</button>
+        <button className='accountBtn'>Security Center</button>
+        <button className='accountBtn'>Open an Account</button>
         <div className="transaction-buttons">
-        <button onClick={() => handleTransaction(100)}>Add $100</button>
-        <button onClick={() => handleTransaction(100.55)}>Add $100.55</button>
+        <button onClick={() => handleTransaction(100)} style={{ display: "none" }}>Add $100</button>
+        <button onClick={() => handleTransaction(100.55)} style={{ display: "none" }}>Add $100.55</button>
       </div>
       </div>
       <div className='userUpdate'>

@@ -1,10 +1,9 @@
-// StepOne.js
 import React from 'react';
 
 const StepOne = ({ formData, handleChange, errors, handleNextStep }) => {
   return (
     <div className="form-step">
-      <h2>Step 1: Username & Password</h2>
+      <h2>Username & Password</h2>
       <input
         type="text"
         name="username"
@@ -12,6 +11,7 @@ const StepOne = ({ formData, handleChange, errors, handleNextStep }) => {
         value={formData.username}
         onChange={handleChange}
       />
+      
       {errors.username && <p className="error-message">{errors.username}</p>}
 
       <input
