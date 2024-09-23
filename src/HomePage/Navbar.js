@@ -45,7 +45,7 @@ const Navbar = ({ className }) => {
           <img
             className={`logo ${className}`}
             src="https://cdn.prod.website-files.com/63ce8fdfb773bb355dff79ca/641195ce17439a75a8d0334d_symbol-contiant.svg"
-            alt="Virgin Federal Credit Union Logo"
+            alt="VFCU Logo"
           />
           <h1 className={`title ${className}`}>
             <span className={`head-title ${className}`}>Virgin</span>
