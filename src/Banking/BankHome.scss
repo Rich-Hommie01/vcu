@@ -352,7 +352,7 @@
 
 .logout.BankHome {
     height: 35px;
-    width: 5.5em;
+    width: 6em;
     font-weight: 500;
     border: #33333328;
     border-radius: 3px;
@@ -365,6 +365,9 @@
 @media (max-width: 762px) {
     .notification.BankHome {
       display: none;
+    }
+    .account {
+        display: none;
     }
   }
 
