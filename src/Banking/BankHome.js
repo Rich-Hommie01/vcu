@@ -85,7 +85,7 @@ const BankHome = () => {
   
   return (
     <>
-      <header><Navbar className={BankHome} /></header>
+      <header><Navbar className="BankHome" /></header>
       <h1 className='h1'>Home</h1>
       <div className='account'>
         <button className='accountBtn'>Accounts</button>
