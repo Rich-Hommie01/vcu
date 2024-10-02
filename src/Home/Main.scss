@@ -12,34 +12,15 @@
     rgba(210, 209, 158, 0.9920343137254902) 78%
   );
   z-index: 1000;
-  box-shadow: 0 2px 4px $background-main;
-  padding: 10px 20px;
+  padding: 5px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logoContainer {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 6vh;
-  margin-right: 10px;
-}
-
-.title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #333;
-  margin: 0;
-  cursor: pointer;
-}
-
-.head-title {
-  display: block;
-  font-size: 16px;
+.vfcuLogo {
+  height: 45px;
+  padding-right: 5px;
 }
 
 .navContainer {
@@ -50,14 +31,13 @@
   list-style: none;
   padding: 0;
   display: flex;
-  color: #222217;
 }
 
 .navContainer ul li {
   cursor: pointer;
   padding: 8px 8px;
   transition: background-color 0.3s;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -66,25 +46,12 @@
   border-radius: 5px;
 }
 
-.btn-secondary.register {
-  font-size: clamp(14px, 1.5vw, 48px);
-  background: $background-main;
-  background: linear-gradient(
-    90deg,
-    rgba(189, 154, 228, 0.9612219887955182) 6%,
-    rgba(204, 186, 213, 0.6446953781512605) 27%,
-    rgba(210, 209, 158, 0.9920343137254902) 78%
-  );
-  color: #222217;
-}
-
 .contentContainer {
   margin-top: 27px;
   position: fixed;
   top: 60px;
   left: 0;
   width: 100%;
-  background-color: #f9f9f9;
   z-index: 999;
   overflow-y: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -110,9 +77,7 @@
 }
 
 @media (max-width: 1059px) {
-  .headerContainer {
-    max-width: 81rem;
-  }
+
   .navContainer .ulhead {
     display: none;
   }

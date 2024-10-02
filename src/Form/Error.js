@@ -1,13 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SuccessPage.scss';
 import flag from '../img/flag.svg';
 
-const SuccessPage = () => {
-  const navigate = useNavigate(); // useNavigate hook inside the function
+const Error = () => {
+  const navigate = useNavigate(); 
 
   const handleBackToHome = () => {
-    navigate('/'); // Navigate to the homepage
+    navigate('/'); 
   };
 
   return (
@@ -16,9 +15,9 @@ const SuccessPage = () => {
       <h2 className='successH2'>It looks like this isn't working right now.</h2>
       <p  className='successText'>We may need additional verification to process your application. To return to VFCU.com, please choose "Close."</p>
       <p className='successText'>Thanks for your patience.</p>
-      <button  className='successBtn'onClick={handleBackToHome}>Go to Homepage</button>
+      <button  className='successBtn'onClick={handleBackToHome}>Close</button>
     </div>
   );
 };
 
-export default SuccessPage;
+export default Error;

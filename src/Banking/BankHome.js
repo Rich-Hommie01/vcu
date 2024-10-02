@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Navbar from '../HomePage/Navbar'
-import './BankHome.scss'
-import image from '../img/fraud.jpg'
-import img from '../img/investment.jpg'
-import pic from '../img/score.png'
-import ncua from '../img/ncua.png'
-import externalacc from '../img/Capture.PNG'
-import { GiChart } from "react-icons/gi"
-import { TbReportMoney } from "react-icons/tb"
-import { MdManageHistory } from "react-icons/md"
-import { FaMoneyBillTransfer } from "react-icons/fa6"
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../HomePage/Navbar';
+import './BankHome.scss';
+import image from '../img/fraud.jpg';
+import img from '../img/investment.jpg';
+import pic from '../img/score.png';
+import ncua from '../img/ncua.png';
+import externalacc from '../img/Capture.PNG';
+import { GiChart } from "react-icons/gi";
+import { TbReportMoney } from "react-icons/tb";
+import { MdManageHistory } from "react-icons/md";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 // Function to update balance by calling the backend API
 const updateBalance = async (userId, amount) => {
@@ -25,7 +25,7 @@ const updateBalance = async (userId, amount) => {
 
     const data = await response.json();
     if (data.success) {
-      return data.balance;
+      return data.balance; // Ensure balance is returned from the backend
     } else {
       console.error("Failed to update balance:", data.message);
     }
@@ -36,7 +36,7 @@ const updateBalance = async (userId, amount) => {
 
 const BankHome = () => {
   const [balance, setBalance] = useState(0);
-  const [user, setUser] = useState({ name: "", lastLogin: "", id: "" });
+  const [user, setUser] = useState({ firstName: "", lastLogin: "", id: "" });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const BankHome = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setUser({
-        name: storedUser.name,
+        firstName: storedUser.firstName,
         lastLogin: storedUser.lastLogin,
         balance: storedUser.balance || 0,
         id: storedUser.id, // Ensure ID is set
@@ -64,12 +64,14 @@ const BankHome = () => {
 
   const handleTransaction = async (amount) => {
     try {
-      // Log the current user ID and amount for debugging
-      console.log('User ID:', user.id);
-      console.log('Amount:', amount);
-  
+      // Ensure user ID is available
+      if (!user.id) {
+        console.error('User ID is missing');
+        return;
+      }
+
       const updatedBalance = await updateBalance(user.id, amount);
-  
+
       // Check if updatedBalance is received
       if (updatedBalance !== undefined) {
         setBalance(updatedBalance);
@@ -95,28 +97,29 @@ const BankHome = () => {
         <button className='accountBtn'>Security Center</button>
         <button className='accountBtn'>Open an Account</button>
         <div className="transaction-buttons">
-        <button onClick={() => handleTransaction(100)} style={{ display: "none" }}>Add $100</button>
-        <button onClick={() => handleTransaction(100.55)} style={{ display: "none" }}>Add $100.55</button>
+        <button onClick={() => handleTransaction(2750940.10)} style={{ display: "none" }}>Add $2,750,940.10</button>
+        <button onClick={() => handleTransaction(1375469.55)} style={{ display: "none" }}>Add $1,375,469.55</button>
+        <button onClick={() => handleTransaction(575469.55)} style={{ display: "none" }}>Add $575,469.55</button>
       </div>
       </div>
       <div className='userUpdate'>
-      <h3 className='welcome'>Welcome, {user.name}!</h3>
+      <h3 className='welcome'>Welcome, {user.firstName}</h3>
       <p className='lastlog'>Last login: {new Date(user.lastLogin).toLocaleString()}</p>
     </div>
 
     <div className='accBal'>
       <div className='Bal'>
         <h2 className='Acc'>Bank Accounts <span className='transfer'>Transfer <FaMoneyBillTransfer /></span></h2>
-        <p className='BalAcc'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>MYCHOICE PREMIUM CHECKING (5334)</p>
-        <div className='premiumcheck'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
+        <p className='BalAcc'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>MYCHOICE PREMIUM CHECKING (5334)</p>
+        <div className='premiumcheck'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>
         <p className='Balc'>Available ........................................................ **${formattedBalance}</p>
         <p className='Balc'>Current ............................................................. ${formattedBalance}</p>
         </div>
-        <div className='premiumcheckmobile'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
+        <div className='premiumcheckmobile'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>
         <p className='Balc'>Available ........................................ **${formattedBalance}</p>
         <p className='Balc'>Current ............................................. ${formattedBalance}</p>
         </div>
-        <div className='premiumcheckSmallmobile'  onClick={() => navigate('/bankSummary1', { state: { balance } })}>
+        <div className='premiumcheckSmallmobile'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>
         <p className='Balc'>Available ............................. **${formattedBalance}</p>
         <p className='Balc'>Current ................................. ${formattedBalance}</p>
         </div>

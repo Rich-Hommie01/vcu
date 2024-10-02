@@ -32,7 +32,7 @@ const Login = () => {
         login(token);
         localStorage.setItem("user", JSON.stringify({
           id: user.id,
-          name: user.name,
+          firstName: user.firstName,
           lastLogin: user.lastLogin,
           balance: user.balance,
         }));

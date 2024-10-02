@@ -7,16 +7,6 @@
     display: none;
 }
 
-.title.BankHome {
-    font-size: 13px;
-    font-weight: 700;
-    color: #333;
-}
-
-.head-title.BankHome {
-    font-size: 16px;
-}
-
 .h1 {
     margin-top: 50px;
     display: none;
@@ -269,6 +259,8 @@
     max-height: 40vh;
     margin-left: 9em;
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .linkExternal {
@@ -281,6 +273,7 @@
 .getstartb {
     margin-left: 140px;
     margin-bottom: 10px;
+    margin-top: 10px;
     border: #33333328;
     border-radius: 3px;
     font-weight: 500;
@@ -363,97 +356,117 @@
 }
 
 @media (max-width: 762px) {
-    .notification.BankHome {
-      display: none;
-    }
-    .account {
-        display: none;
-    }
-  }
 
-  @media (max-width: 615px) {
-    .welcome {
-        font-size: $font-size13;
-    }
-    .lastlog {
-        font-size: $font-size13;
-    }
-    .premiumcheck {
-        display: none;
-    }
-    .premiumcheckmobile {
-        display: block;
-    }
-    .totaldepo {
-        display: none;
-    }
-    .totaldepomobile {
-        display: block;
-    }
-    .externalacclink {
-      max-width: 17em;
-    }
-    .creditfiscoscore {
-        width: 100%;
-        margin-right: 10px;
-    }
-    .creditsco {
-        height: 55px;
-        background-color: #5e5e5e7a;
-    }
-    .fiscorepic{
-        max-width: 25em;
-    }
-    .exacc {
-        max-width: 16.5em;
-        height: 10px;
-    }
-    .linkExternal {
-        font-size: $font-size15;
-    }
+.notification.BankHome {
+    display: none;
+}
 
-    .getstartb {
-        margin-left: 75px;
-    }
-    .fdic {
-        display: none;
-    }
-    .ncuapic {
-        width: 6em;
-    }
-    .foottextnc {
-        font-size: 10px;
-        padding-left: 10px;
-    }
+.account {
+    display: none;
+}
 
-    .signpay {
-       max-width: 13em;
-    }
-    .shoscore {
-        max-width: 13em;
-    }
+}
 
-    .getstartb {
-        max-width: 13em;
-    }
-  }
+@media (max-width: 615px) {
 
-  @media (max-width: 420px) {
-    .premiumcheckmobile {
-        display: none;
-    }
+.welcome {
+    font-size: $font-size13;
+}
 
-    
-    .totaldepomobile {
-        display: none;
-    }
+.lastlog {
+    font-size: $font-size13;
+}
 
-    .premiumcheckSmallmobile {
-        display: block;
-    }
+.premiumcheck {
+    display: none;
+}
 
-    .totaldepoSmallmobile {
-        display: block;
-    }
+.premiumcheckmobile {
+    display: block;
+}
 
-  }
+.totaldepo {
+    display: none;
+}
+
+.totaldepomobile {
+    display: block;
+}
+
+.externalacclink {
+    max-width: 17em;
+}
+
+.creditfiscoscore {
+    width: 100%;
+    margin-right: 10px;
+}
+
+.creditsco {
+    height: 55px;
+    background-color: #5e5e5e7a;
+}
+
+.fiscorepic{
+    max-width: 25em;
+}
+
+.exacc {
+    max-width: 16.5em;
+    height: 10px;
+}
+
+.linkExternal {
+    font-size: $font-size15;
+}
+
+.getstartb {
+    margin-left: 75px;
+}
+
+.fdic {
+    display: none;
+}
+
+.ncuapic {
+    width: 6em;
+}
+
+.foottextnc {
+    font-size: 10px;
+    padding-left: 10px;
+}
+
+.signpay {
+    max-width: 13em;
+}
+
+.shoscore {
+    max-width: 13em;
+}
+
+.getstartb {
+    max-width: 13em;
+}
+
+}
+
+@media (max-width: 420px) {
+
+.premiumcheckmobile {
+    display: none;
+}
+
+.totaldepomobile {
+    display: none;
+}
+
+.premiumcheckSmallmobile {
+    display: block;
+}
+
+.totaldepoSmallmobile {
+    display: block;
+}
+
+}

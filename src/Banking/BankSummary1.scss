@@ -1,7 +1,7 @@
 @import '../Home/variables.scss';
 
 .headerContainer.accountHistory {
-         position: relative;
+    position: relative;
 }
 
 .ulhead.accountHistory {
@@ -9,159 +9,178 @@
 }
 
 .bankview.accountHistory {
-         display: flex;
-         justify-content: space-between;
-     }
-     
-     .notification.accountHistory {
-         padding-right: 5px;
-         font-size: $font-size15;
-     }
-     
-     .logout.accountHistory {
-         height: 30px;
-     }
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification.accountHistory {
+    padding-right: 5px;
+    font-size: $font-size15;
+}
+
+.logout.accountHistory {
+    height: 30px;
+}
+
+.account-details {
+    justify-content: space-between;
+    display: flex;
+    background-color: #cfcaca79;
+    padding: 15px;
+}
 
 .check5334 {
-         justify-content: space-between;
-         display: flex;
-         background-color: #cfcaca79;
-         padding: 15px;
+    background-color: #dad2d28e;
 }
 
-.check5334text {
-         font-size: $font-size18;
-         margin-bottom: 1px;
+.account-name, .available-balance {
+    font-size: $font-size18;
+    margin-bottom: 1px;
 }
 
-.backBanksum {
-         cursor: pointer;
+.account-span {
+    display: block;
+}
+
+.return-link {
+    cursor: pointer;
 }
 
 .accountHistorySum {
-         display: flex;
-         margin-top: 1px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #cfcaca79;
 }
 
-.navsumacc {
-         max-width: 30em;
-         min-width: 16em;
-         padding-left: 3em;
-         border: 2px solid #cfcaca79;
+.transaction-header {
+    padding-left: 10px;
 }
 
-.navsumaccText {
-         font-size: $font-size15;
-         padding-right: 25px;
-         cursor:  pointer;
+.transaction-description {
+    font-size: $font-size15;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #dad2d28e;
+    display: flex;
+    align-items: center;
 }
 
-.transhissum {
-         max-width: 60em;
-         padding-left: 3em;
-         margin-right: 30px;
-         padding-bottom: 30px;
-         border: 2px solid #cfcaca79;
+.transactions-filter {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #ccc;
 }
 
-.transText {
-         border: 2px solid #cfcaca79;
-         display: flex;
-         justify-content: center;
-         padding: 15px;
-         font-size: $font-size18;
+.filter-text {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
 }
 
-.alltransaction {
-         display: flex;
-         justify-content: space-between;
-         border: 1px solid #ccc;
-         padding-left: 15px;
-         padding-right: 15px;
-         font-weight: 500;
+.search-container {
+    width: 100%;
 }
 
-.borderpx {
-         border: 1px solid #ccc;
-         margin-bottom: -2px;
+.transactions-section {
+    padding: 10px;
 }
 
-.nopendtext {
-         display: flex;
-         justify-content: center;
-         background-color: #dad2d242;
-         font-weight: 500;
+.section-title {
+    background-color: #ccc;
+    font-size: $font-size22;
+    padding-left: 5px;
 }
 
-.penpost {
-         border-bottom: 3px solid #ccc;
-         padding-left: 15px;
-         padding-right: 15px;
-         font-size: $font-size22;
+.no-pending-text {
+    background-color: #dad2d242;
+    display: flex;
+    justify-content: center;
 }
 
-.transactDetail {
-         padding-left: 15px;
-         padding-right: 15px;
-         font-weight: 500;
+.transaction-date {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
 }
 
-.histext {
-         padding-left: 15px;
-         background-color: #dad2d242;
-         font-weight: 500;
+.transaction-history-text {
+    background-color: #dad2d242;
+    display: flex;
+    justify-content: center;
 }
 
 .input-container {
-         display: flex;
-         align-items: center;
-         border: 1px solid #ccc;
-         padding: 5px;
-         border-radius: 5px;
-         width: 100%;
-       }
-       
-       .search-icon {
-         font-size: 1.5rem;
-         margin-right: 5px;
-         color: #666;
-       }
-       
-       .search-input {
-         border: none;
-         outline: none;
-         flex: 1;
-         padding: 5px;
-       }
-       
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+}
 
-       .transactDetail {
-         display: flex;
-         justify-content: space-between;
-       }
+.search-icon {
+    font-size: 1.5rem;
+    margin-right: 5px;
+    color: #666;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+}
+
+.transactDetail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navsumacc {
+    width: 30em;
+}
+
+.navsumaccText {
+    font-size: 15px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.transText {
+    font-size: 15px;
+}
 
 @media (max-width: 862px) {
-        .navsumacc {
-          display: none;
-        }
-        .transhissum {
-          max-width: 100%;
-          padding-left: 1em;
-          margin-right: 20px;
-        }
+  
+.navsumacc {
+    display: none;
+}
+
+.transhissum {
+    max-width: 100%;
+    padding-left: 1em;
+    margin-right: 20px;
+}
+
 }       
 
 @media (max-width: 762px) {
-        .notification.accountHistory {
-          display: none;
-        }
-        .check5334text {
-          font-size: $font-size13;
-        }
-        .transText {
-          font-size: $font-size13;
-        }
-        .penpost {
-          font-size: $font-size15;
-        }
+
+.notification.accountHistory {
+      display: none;
+}
+
+.check5334text {
+    font-size: $font-size13;
+}
+
+.transText {
+    font-size: $font-size13;
+}
+
+.penpost {
+    font-size: $font-size15;
+}
+
 }

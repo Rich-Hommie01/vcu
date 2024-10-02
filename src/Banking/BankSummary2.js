@@ -12,21 +12,20 @@ const BankSummary2 = () => {
   return (
     <div>
       <Navbar className="accountHistory" />
-      <div className='account'>
-        <button>Accounts</button>
-        <button>Bill Pay</button>
-        <button>Tools & Investing</button>
-        <button>Rewards & Deals</button>
-        <button>Security Center</button>
-        <button>Open an Account</button>
+      <div className='account-navigation'>
+        <button className="accountBtn">Accounts</button>
+        <button className="accountBtn">Bill Pay</button>
+        <button className="accountBtn">Tools & Investing</button>
+        <button className="accountBtn">Rewards & Deals</button>
+        <button className="accountBtn">Security Center</button>
+        <button className="accountBtn">Open an Account</button>
       </div>
         <div className='check5334'>
-          <div>
-            <p className='check5334text'>Regular Share Savings</p>
-            <p className='check5334text'>x2543</p>
-            <p className='check5334text backBanksum' onClick={() => navigate('/bankHome')}> <IoArrowBackCircleOutline /> Return to Account Summary</p>
+          <div className='account-details'>
+            <p className='account-name'>Regular Share Savings<span className="account-span">x2543</span></p>
+            <p className='account-name'>Available Balance: <span>$0.00</span></p>
           </div>
-            <p className='check5334text'>Available Balance: <span>$0.00</span></p>
+            <p className='return-link' onClick={() => navigate('/bankHome')}> <IoArrowBackCircleOutline /> Return to Account Summary</p>
         </div>
         <div className='accountHistorySum'>
           <div className='navsumacc'>
@@ -46,17 +45,17 @@ const BankSummary2 = () => {
           </div>
         <div className='transhissum'>
           <p className='transText'>Your available balance is equal to the amount of the current balance, plus or minus any pending transactions, and is available for your immediate use. Some items, such as checks, may not be available immediately upon deposit and will not be included in the available balance calculation. Your available balance does not include checks that you may have written that have not been presented to the bank.</p>
-          <p className='alltransaction'>Transactions <span>All <SiCoderwall /></span></p>
+          <p className='filter-text'>Transactions <span>All <SiCoderwall /></span></p>
           <div className="input-container">
             <CiSearch className="search-icon" />
             <input type="text" placeholder="Search" className="search-input" />
           </div>
-        <div className='borderpx'>
-        <h2 className='borderpx penpost'>PENDING <RiQuestionFill /> </h2>
-        <p className='borderpx nopendtext'>No pending transaction.</p>
+        <div className='transactions-section'>
+        <h2 className='section-title'>PENDING <RiQuestionFill /> </h2>
+        <p className='no-pending-text'>No pending transaction.</p>
         </div>
-        <div className='borderpx'>
-          <h2 className='borderpx penpost'>POSTED</h2>
+        <div className='transactions-section'>
+          <h2 className='section-title'>POSTED</h2>
           <p className='borderpx histext' style={{display: 'flex', justifyContent: 'center'}}>No recent transaction.</p>
         </div>
         </div>

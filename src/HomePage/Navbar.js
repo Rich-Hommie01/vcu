@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CheckingSavingsContent, LoansCreditCardsContent, ToolsResourcesContent, SeasonsYouContent } from './HiddenContent'
+import { CheckingSavingsContent, LoansCreditCardsContent, ToolsResourcesContent, SeasonsYouContent } from './HiddenContent';
+import vfcu from '../img/vfcu.svg';
+import vfcuLogo from '../img/bank.svg';
 import { useAuth } from '../auth/AuthProvider'
 
 const Navbar = ({ className }) => {
@@ -41,16 +43,9 @@ const Navbar = ({ className }) => {
   return (
     <>
       <header className={`headerContainer ${className}`}>
-        <div className={`logoContainer ${className}`} onClick={handleClick}>
-          <img
-            className={`logo ${className}`}
-            src="https://cdn.prod.website-files.com/63ce8fdfb773bb355dff79ca/641195ce17439a75a8d0334d_symbol-contiant.svg"
-            alt="VFCU Logo"
-          />
-          <h1 className={`title ${className}`}>
-            <span className={`head-title ${className}`}>Virgin</span>
-            Federal Credit Union
-          </h1>
+        <div className={`vfcuContainer ${className}`} onClick={handleClick}>
+          <img className={`vfcuLogo ${className}`} src={vfcuLogo} alt="VFCU Logo" />
+          <img src={vfcu} alt="vfcu" />
         </div>
         <nav className={`navContainer ${menuOpen ? 'open' : ''}`}>
         <button className={`navToggle ${className}`} onClick={toggleMenu}>
