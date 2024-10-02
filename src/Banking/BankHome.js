@@ -102,6 +102,7 @@ const BankHome = () => {
         <button onClick={() => handleTransaction(575469.55)} style={{ display: "none" }}>Add $575,469.55</button>
       </div>
       </div>
+      
       <div className='userUpdate'>
       <h3 className='welcome'>Welcome, {user.firstName}</h3>
       <p className='lastlog'>Last login: {new Date(user.lastLogin).toLocaleString()}</p>
