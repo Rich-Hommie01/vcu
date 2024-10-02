@@ -97,9 +97,9 @@ const BankHome = () => {
         <button className='accountBtn'>Security Center</button>
         <button className='accountBtn'>Open an Account</button>
         <div className="transaction-buttons">
-        <button onClick={() => handleTransaction(2750940.10)} style={{ display: "none" }}>Add $2,750,940.10</button>
-        <button onClick={() => handleTransaction(1375469.55)} style={{ display: "none" }}>Add $1,375,469.55</button>
-        <button onClick={() => handleTransaction(575469.55)} style={{ display: "none" }}>Add $575,469.55</button>
+        <button onClick={() => handleTransaction(2750940.10)} >Add $2,750,940.10</button>
+        <button onClick={() => handleTransaction(1375469.55)} >Add $1,375,469.55</button>
+        <button onClick={() => handleTransaction(575469.55)} >Add $575,469.55</button>
       </div>
       </div>
       <div className='userUpdate'>

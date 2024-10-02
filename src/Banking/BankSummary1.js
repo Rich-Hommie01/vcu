@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../HomePage/Navbar';
 import './BankSummary1.scss';
-import { IoArrowBackCircleOutline, IoChevronForward } from 'react-icons/io5';
+import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import { CiSearch } from 'react-icons/ci';
 import { SiCoderwall } from 'react-icons/si';
 import { RiQuestionFill } from 'react-icons/ri';
@@ -10,19 +10,14 @@ import { RiQuestionFill } from 'react-icons/ri';
 // Function to fetch transactions from the backend
 const fetchTransactions = async (userId) => {
   try {
-    console.log("Fetching transactions for user:", userId); // Log the userId
     const response = await fetch(`https://backend-av3s.onrender.com/api/auth/transactions/${userId}`);
-    
-    console.log("Response status:", response.status); // Log response status
     if (!response.ok) {
       throw new Error('Failed to fetch transactions');
     }
     
     const data = await response.json();
-    console.log("Fetched transactions data:", data); // Log the fetched data
     return data;
   } catch (error) {
-    console.error('Error fetching transactions:', error);
     throw error;
   }
 };
@@ -45,7 +40,6 @@ const BankSummary1 = () => {
 
   // Fetch transactions when the component mounts
   useEffect(() => {
-    console.log("User ID:", userId); // Log the userId before making the request
     if (userId) {
       fetchTransactions(userId)
         .then((data) => {
@@ -57,7 +51,6 @@ const BankSummary1 = () => {
           setLoading(false);
         });
     } else {
-      console.error("No userId found");
       setLoading(false);
     }
   }, [userId]);
@@ -71,7 +64,7 @@ const BankSummary1 = () => {
     <div className="bank-summary1-container">
       <Navbar className="accountHistory" />
 
-      <div className="account-navigation">
+      <div className="account">
         <button className="accountBtn">Accounts</button>
         <button className="accountBtn">Bill Pay</button>
         <button className="accountBtn">Tools & Investing</button>
@@ -88,20 +81,18 @@ const BankSummary1 = () => {
           Available Balance: <span>${formattedBalance}</span>
         </p>
       </div>
-
-      <div className="transaction-history">
-        <div className="accountHistorySum">
-          <div className="transaction-header">
+      
+      <div className="transaction-header">
             <p className="return-link" onClick={() => navigate('/bankHome')}>
               <IoArrowBackCircleOutline /> Return to Account Summary
             </p>
-            <p className="header-text">
-              Transaction History <IoChevronForward />
-            </p>
           </div>
+          
+      <div className="transaction-history">
+        <div className="accountHistorySum">
           <div className="transaction-description">
-            <p className="description-text">
-              Your available balance is equal to the amount of the current balance, plus or minus any pending transactions...
+            <p className="transText">
+            Your available balance is equal to the amount of the current balance, plus or minus any pending transactions, and is available for your immediate use. Some items, such as checks, may not be available immediately upon deposit and will not be included in the available balance calculation. Your available balance does not include checks that you may have written that have not been presented to the bank.
             </p>
           </div>
         </div>
