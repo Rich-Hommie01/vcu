@@ -12,7 +12,7 @@ const BankSummary2 = () => {
   return (
     <div>
       <Navbar className="accountHistory" />
-      <div className='account-navigation'>
+      <div className='account'>
         <button className="accountBtn">Accounts</button>
         <button className="accountBtn">Bill Pay</button>
         <button className="accountBtn">Tools & Investing</button>
