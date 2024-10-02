@@ -112,16 +112,16 @@ const BankHome = () => {
         <h2 className='Acc'>Bank Accounts <span className='transfer'>Transfer <FaMoneyBillTransfer /></span></h2>
         <p className='BalAcc'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>MYCHOICE PREMIUM CHECKING (5334)</p>
         <div className='premiumcheck'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>
-        <p className='Balc'>Available ........................................................ **${formattedBalance}</p>
-        <p className='Balc'>Current ............................................................. ${formattedBalance}</p>
+        <p className='Balc'>Available .................................................... **${formattedBalance}</p>
+        <p className='Balc'>Current ........................................................ ${formattedBalance}</p>
         </div>
         <div className='premiumcheckmobile'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>
-        <p className='Balc'>Available ........................................ **${formattedBalance}</p>
-        <p className='Balc'>Current ............................................. ${formattedBalance}</p>
+        <p className='Balc'>Available .................................... **${formattedBalance}</p>
+        <p className='Balc'>Current ........................................ ${formattedBalance}</p>
         </div>
         <div className='premiumcheckSmallmobile'  onClick={() => navigate('/bankSummary1', { state: { userId: user.id, balance } })}>
-        <p className='Balc'>Available ............................. **${formattedBalance}</p>
-        <p className='Balc'>Current ................................. ${formattedBalance}</p>
+        <p className='Balc'>Available ........................ **${formattedBalance}</p>
+        <p className='Balc'>Current ............................ ${formattedBalance}</p>
         </div>
         <p className='BalAcc'  onClick={() => navigate('/bankSummary2')}>REGULAR SHARE SAVINGS (2543)</p>
         <div className='premiumcheck'  onClick={() => navigate('/bankSummary2')}>
