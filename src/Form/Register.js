@@ -1,265 +1,226 @@
-import React, { useState } from 'react';
-import './Register.scss';
-import Navbar from '../HomePage/Navbar';
-import ProgressBar from './ProgressBar';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { nextStep, prevStep, setFormData, setError, setLoading, resetRegistration } from '../redux/slices/registrationSlice';
+import { useNavigate } from 'react-router-dom';
+import Nav from '../components/Nav';
+import IntroContent from './IntroContent';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
 import StepFive from './StepFive';
-import StepSix from './StepSix.js';
-import Error from './Error.js';
-import IntroContent from './IntroContent';
-import validator from 'validator';
+import StepSix from './StepSix';
+import { Spinner } from 'react-bootstrap';
 
 const Register = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    dob: '',
-    street: '',
-    apt: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    username: '',
-    password: '',
-    phone: '',
-    idNumber: '',
-    issueState: '',
-    expirationDate: '',
-    employment: '',  
-  occupation: '',
-    email: '',
-    ssn: '',
-  });
-
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionSuccess, setSubmissionSuccess] = useState(false);
-  const [submissionError, setSubmissionError] = useState(null);
-  
-  const totalSteps = 6;
-
-  const stepMessages = [
-    "Personal Information",
-    "Residential Address",
-    "Digital Banking Registration",
-    "Let's verify your ID",
-    "Employment Status",
-    "Review and Confirm",
-  ];
-
-  // Age calculation function
-  const calculateAge = (dob) => {
-    if (!dob) return null; 
-    const today = new Date();
-    const birthDate = new Date(dob);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-
-    return age;
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { currentStep, formData, errors, loading } = useSelector((state) => state.registration);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, checked, type } = event.target;
+    if (type === 'checkbox') {
+      dispatch(setFormData({ field: name, value: checked }));
+    } else {
+      dispatch(setFormData({ field: name, value }));
+    }
+
+    if (errors[name]) {
+      dispatch(setError({ field: name, error: '' }));
+    }
   };
 
-  const handleBlur = (event) => {
-    const { name } = event.target;
-    setTouched((prev) => ({
-      ...prev,
-      [name]: true,
-    }));
-    validateStep(currentStep);
-  };
-
-  const validateStep = (step) => {
-    const validationErrors = {};
-    
-    if (step === 1) {
-      if (!formData.firstName.trim()) validationErrors.firstName = 'First name is required';
-      if (!formData.lastName.trim()) validationErrors.lastName = 'Last name is required';
-      
-      const age = calculateAge(formData.dob);
-      if (age === null || age < 18) validationErrors.dob = 'You must be at least 18 years old';
-      
-      if (!validator.isLength(formData.ssn, { min: 9, max: 9 })) validationErrors.ssn = 'SSN must be 9 digits';
+  const checkUsernameAvailability = async () => {
+    try {
+      const response = await fetch('https://backend-av3s.onrender.com/api/auth/check-username', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: formData.username }),
+      });
+      const result = await response.json();
+      return result.success;
+    } catch (error) {
+      return false;
     }
-
-    if (step === 2) {
-      if (!formData.street.trim()) validationErrors.street = 'Street address is required';
-      if (!formData.city.trim()) validationErrors.city = 'City is required';
-      if (!validator.isAlpha(formData.city)) validationErrors.city = 'City must contain only letters';
-      if (!formData.state.trim() || !validator.isLength(formData.state, { min: 2, max: 2 })) {
-        validationErrors.state = "Please enter a valid 2-letter state code (e.g., 'NY')";
-      }
-      if (!validator.isPostalCode(formData.zipCode, 'US')) validationErrors.zipCode = 'Invalid zip code';
-    }
-
-    if (step === 3) {
-      if (!validator.isLength(formData.username, { min: 4 })) 
-        validationErrors.username = 'Username must be at least 4 characters long';
-      if (!/^[a-zA-Z0-9]*$/.test(formData.username)) 
-        validationErrors.username = 'Username can only contain alphanumeric characters';
-      if (!validator.isStrongPassword(formData.password, { minLength: 6, minSymbols: 1, minNumbers: 1 })) {
-        validationErrors.password = 'Password must be at least 6 characters and include a number and special character';
-      }
-      if (!validator.isMobilePhone(formData.phone, 'en-US')) 
-        validationErrors.phone = 'Invalid phone number';
-    }
-
-    if (step === 4) {
-      if (!formData.idNumber.trim()) validationErrors.idNumber = 'ID number is required';
-      if (!formData.issueState.trim()) validationErrors.issueState = 'Issuing state is required';
-      if (!validator.isDate(formData.expirationDate)) validationErrors.expirationDate = 'Invalid expiration date';
-    }
-
-    if (step === 6) {
-      if (!validator.isEmail(formData.email)) validationErrors.email = 'Enter a valid email';
-    }
-
-    setErrors(validationErrors);
-    return Object.keys(validationErrors).length === 0;
   };
 
   const handleNext = async () => {
-    // Validate current step before proceeding
-    if (validateStep(currentStep)) {
-      if (currentStep === 3) {
-        // Username availability check
-        try {
-          const response = await fetch(`https://backend-av3s.onrender.com/api/auth/check-username`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: formData.username }),
-          });
-          const result = await response.json();
-  
-          if (result.success === false) {
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              username: result.message,
-            }));
-            return;
-          } else {
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              username: null,
-            }));
-          }
-        } catch (error) {
-          console.error('Error checking username:', error);
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            username: 'Error checking username availability. Please try again.',
-          }));
-          return;
-        }
+    if (currentStep === 3) {
+      const isUsernameAvailable = await checkUsernameAvailability();
+      if (!isUsernameAvailable) {
+        dispatch(setError({ field: 'username', error: 'Username already exists' }));
+        return;
       }
-      
-      setCurrentStep((prevStep) => prevStep + 1);
-    } else {
-      console.log('Validation failed:', errors); 
+    }
+
+    if (validateStep()) {
+      dispatch(nextStep());
     }
   };
-  
-  
 
-  const handlePrev = () => setCurrentStep((prevStep) => prevStep - 1);
+  const handlePrev = () => {
+    dispatch(prevStep());
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
-    // Validate the entire form before submitting
-    if (validateStep(currentStep) && Object.keys(errors).length === 0) {
-      setIsSubmitting(true);
-      setSubmissionError(null);
-
+  const handleSubmit = async () => {
+    if (validateStep()) {
+      dispatch(setLoading(true));
       try {
         const response = await fetch('https://backend-av3s.onrender.com/api/auth/signup', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            username: formData.username,
+          }),
         });
-        if (!response.ok) throw new Error(`Failed to submit form: ${response.statusText}`);
 
-        const result = await response.json();
-        console.log('Success:', result);
-        setSubmissionSuccess(true);
+        if (response.ok) {
+          navigate('/error');
+          dispatch(resetRegistration());
+        }
+
       } catch (error) {
         console.error('Error submitting form:', error);
-        setSubmissionError(error.message);
       } finally {
-        setIsSubmitting(false);
+        dispatch(setLoading(false));
       }
-    } else {
-      setSubmissionError("Please fix the errors in the form before submitting.");
     }
+  };
+
+  const validateStep = () => {
+    let validationErrors = {};
+
+    if (currentStep === 1) {
+      if (!formData.firstName?.trim()) {
+        validationErrors.firstName = 'First name is required';
+      }
+      if (!formData.lastName?.trim()) {
+        validationErrors.lastName = 'Last name is required';
+      }
+      if (!formData.ssn || formData.ssn.length !== 9) {
+        validationErrors.ssn = 'SSN must be 9 digits long';
+      }
+      if (!formData.dob || !isValidDate(formData.dob)) {
+        validationErrors.dob = 'Please enter a valid date of birth';
+      }
+    } else if (currentStep === 2) {
+      if (!formData.street?.trim()) {
+        validationErrors.street = 'Street address is required';
+      }
+      if (!formData.city?.trim()) {
+        validationErrors.city = 'City is required';
+      }
+      const stateRegex = /^[A-Za-z]{2}$/;
+      if (!stateRegex.test(formData.state)) {
+        validationErrors.state = 'State must be a valid two-letter abbreviation (e.g., CA, NY)';
+      }
+      const zipCodeRegex = /^\d{5}$/;
+      if (!zipCodeRegex.test(formData.zipCode)) {
+        validationErrors.zipCode = 'ZIP code must be 5 digits';
+      }
+    } else if (currentStep === 3) {
+      if (!formData.username?.trim()) {
+        validationErrors.username = 'Username is required';
+      }
+      if (!formData.password || formData.password.length < 8) {
+        validationErrors.password = 'Password must be at least 8 characters long';
+      }
+      const phoneRegex = /^\d{10}$/;
+      if (!phoneRegex.test(formData.phone)) {
+        validationErrors.phone = 'Phone number must be 10 digits';
+      }
+    } else if (currentStep === 4) {
+      if (!formData.idNumber) {
+        validationErrors.idNumber = 'ID Number is required';
+      }
+      if (!formData.issueState) {
+        validationErrors.issueState = 'Issuing State is required';
+      }
+      if (!formData.expirationDate) {
+        validationErrors.expirationDate = 'Expiration Date is required';
+      }
+    } else if (currentStep === 6) {
+      const emailRegex = /\S+@\S+\.\S+/;
+      if (!emailRegex.test(formData.email)) {
+        validationErrors.email = 'Please enter a valid email address';
+      }
+
+      if (!formData.terms) {
+        validationErrors.terms = 'You must provide your electronic signature by agreeing to the terms.';
+      }
+      if (!formData.notifications) {
+        validationErrors.notifications = 'You must agree to the Consumer Report Authorization.';
+      }
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      Object.keys(validationErrors).forEach((field) =>
+        dispatch(setError({ field, error: validationErrors[field] }))
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  const isValidDate = (dateString) => {
+    const mmddyyyyPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
+    const yyyymmddPattern = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+
+    return mmddyyyyPattern.test(dateString) || yyyymmddPattern.test(dateString);
+  };
+
+  const goToLogin = () => {
+    navigate('/login');
   };
 
   return (
     <>
-      <Navbar className="registerNavBar" />
-      <div className="multi-step-form-container">
-        {submissionSuccess ? (
-          <Error />
-        ) : (
-          <form className="multi-step-form" onSubmit={handleSubmit}>
-            {currentStep > 0 && <ProgressBar currentStep={currentStep} totalSteps={totalSteps} stepMessages={stepMessages} />}
-            {currentStep === 0 && <IntroContent />}
-            {currentStep === 1 && <StepOne formData={formData} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />}
-            {currentStep === 2 && <StepTwo formData={formData} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />}
-            {currentStep === 3 && <StepThree formData={formData} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />}
-            {currentStep === 4 && <StepFour formData={formData} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />}
-            {currentStep === 5 && <StepFive formData={formData} handleChange={handleChange} errors={errors} />}
-            {currentStep === 6 && <StepSix formData={formData} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />}
-            
-            {submissionError && <div className="error-message">{submissionError}</div>}
-            <div className="button-group">
-              {currentStep > 1 && (
-                <button 
-                  type="button" 
-                  className="prev button" 
-                  onClick={handlePrev} 
-                  disabled={isSubmitting}
-                >
-                  Previous
+      <Nav className='registerNav' />
+      <div className='registerContainer'>
+        <div className='registerForm'>
+          {currentStep === 0 && (
+            <div>
+              <IntroContent />
+              <div className='btnContainer'>
+                <button className='Btn' onClick={goToLogin}>Back to Login</button>
+                <button className='Btn' onClick={handleNext}>Next</button>
+              </div>
+            </div>
+          )}
+
+          {currentStep === 1 && <StepOne formData={formData} errors={errors} handleChange={handleChange} />}
+          {currentStep === 2 && <StepTwo formData={formData} errors={errors} handleChange={handleChange} />}
+          {currentStep === 3 && <StepThree formData={formData} errors={errors} handleChange={handleChange} />}
+          {currentStep === 4 && <StepFour formData={formData} errors={errors} handleChange={handleChange} />}
+          {currentStep === 5 && <StepFive formData={formData} errors={errors} handleChange={handleChange} />}
+          {currentStep === 6 && <StepSix formData={formData} errors={errors} handleChange={handleChange} />}
+
+          {currentStep > 0 && (
+            <div className='btnContainer'>
+              <button className='Btn' onClick={handlePrev} disabled={loading}>Previous</button>
+              {currentStep === 6 ? (
+                <button className='Btn' onClick={handleSubmit} disabled={loading}>
+                  {loading ? (
+                    <>
+                      <Spinner animation="border" size="sm" style={{ marginRight: '5px' }} />
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit'
+                  )}
                 </button>
-              )}
-              {currentStep < 6 && (
-                <button 
-                  type="button" 
-                  className="next button" 
-                  onClick={handleNext} 
-                  disabled={isSubmitting}
-                >
-                  Next
-                </button>
-              )}
-              {currentStep === 6 && (
-                <button 
-                  type="submit" 
-                  className="submit button" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit'} 
-                </button>
+              ) : (
+                <button className='Btn' onClick={handleNext} disabled={loading}>Next</button>
               )}
             </div>
-          </form>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

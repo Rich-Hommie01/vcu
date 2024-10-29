@@ -1,107 +1,84 @@
 import React, { useState } from "react";
-import axios from "axios";
+import './Login.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../HomePage/Navbar";
-import "./Login.scss";
-import Footer from "../HomePage/Footer";
-import { useAuth } from "../auth/AuthProvider";
-import { Spinner } from 'react-bootstrap';  // Import Spinner from Bootstrap
+import Nav from "../components/Nav";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { loading, error } = useSelector((state) => state.auth);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null);
-    setLoading(true);
 
-    try {
-      const response = await axios.post(
-        "https://backend-av3s.onrender.com/api/auth/login",
-        { username, password }
-      );
+    if (username && password) {
+      const resultAction = await dispatch(loginUser({ username, password }));
 
-      if (response.data.success) {
-        const token = response.data.token;
-        const user = response.data.user;
-        login(token);
-        localStorage.setItem("user", JSON.stringify({
-          id: user.id,
-          firstName: user.firstName,
-          lastLogin: user.lastLogin,
-          balance: user.balance,
-        }));
-        navigate("/bankHome");
-      } else {
-        setError("Invalid credentials. Please try again.");
+      if (loginUser.fulfilled.match(resultAction)) {
+        navigate("/bankhome");
       }
-    } catch (error) {
-      console.error("Login failed:", error);
-      setError("Invalid credentials. Please try again.");
-    } finally {
-      setLoading(false);
     }
+  };
+
+  const handleForgotPassword = () => {
+    navigate("/forgetUserPass");
   };
 
   return (
     <>
-      <Navbar className="nav" />
+      <Nav className="loginNav" />
       <div className="login-background">
-        <div className="card login-card">
-          <h3 className="text-center mb-4">Sign In to Continue</h3>
-          <form onSubmit={handleSubmit} className="login-form">
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">
-                Username
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                disabled={loading} // Disable input while loading
-              />
+        <form onSubmit={handleSubmit} className="LoginContainer">
+          <h3 className="tex">Sign In to Continue</h3>
+
+          <div className="LoginInput">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
+
+          <div className="LoginInput">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
+
+          {error && <p className="errorMessage">{error}</p>}
+
+          {loading ? (
+            <div className="loadingBtn">
+              <div className="ball-loader"></div>
+              <span className="loadingB"> Loading...</span>
             </div>
+          ) : (
+            <button type="submit" className="Btn">
+              Login
+            </button>
+          )}
 
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={loading} // Disable input while loading
-              />
-            </div>
-
-            {error && <p className="error">{error}</p>}
-
-            {loading ? (
-              <div className="d-flex justify-content-center">
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              </div>
-            ) : (
-              <button type="submit" className="btn btn-primary w-100 loginBtn">
-                Login
-              </button>
-            )}
-          </form>
-        </div>
+          <p className="handleForgotPassword">
+            Forgot <span onClick={handleForgotPassword}>Login</span> ID or <span onClick={handleForgotPassword}>Password?</span>
+          </p>
+        </form>
       </div>
-      <Footer />
     </>
   );
 };

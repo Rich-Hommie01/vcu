@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ForgetUserPass.scss';
-import Navbar from '../HomePage/Navbar';
+import Nav from '../components/Nav';
 import { RiQuestionFill } from "react-icons/ri";
 import { IoArrowBackCircleOutline, IoChevronForward } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
@@ -10,9 +10,9 @@ const ForgetUserPass = () => {
     username: '',
     password: ''
   });
-  const [showPassword, setShowPassword] = useState(false); // State for show/hide password
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate(); // Hook to navigate between routes
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -22,7 +22,7 @@ const ForgetUserPass = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Toggle the visibility of the password
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = () => {
@@ -42,7 +42,7 @@ const ForgetUserPass = () => {
 
   return (
     <>
-      <Navbar className='forgetuser' />
+      <Nav className='forgetuser' />
 
       <div className='faquser'>
         <div className='left-side'>
@@ -104,7 +104,7 @@ const ForgetUserPass = () => {
             </div>
 
             <div>
-              <button onClick={handleSubmit} className="submit-btn">
+              <button onClick={handleSubmit} className="Btn">
                 Next
               </button>
             </div>

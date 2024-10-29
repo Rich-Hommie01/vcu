@@ -1,115 +1,138 @@
-.headerContainer.registerNavBar {
-  position: relative;
-}
+@import '../components/variables.scss';
 
-.ulhead.registerNavBar {
+.NavContainer.registerNav {
   display: none;
 }
 
-.multi-step-form-container {
+.registerContainer {
+  background-color: $background-color;
+  height: 100vh;
   display: flex;
   justify-content: center;
+  padding: 20px;
+  font-size: $font-size18;
+}
+
+.registerForm {
+  width: 50em;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.errorMessage {
+  color: red;
+  font-size: $font-size15;
+  padding: 3px;
 }
 
 .TaxId {
   display: flex;
   justify-content: space-evenly;
+  padding: 30px;
 }
 
 .TaxIdcon {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px; 
+  margin-right: 20px;
 }
 
 .TaxIdcon span {
-  margin-bottom: 10px;
-  font-size: 16px; 
+  padding: 10px;
+  font-size: $font-size18;
   text-align: center;
 }
 
 .TaxIdcon img {
-  width: 70px; 
+  width: 70px;
   height: auto;
 }
 
-.authForm h2{
-  font-size: 20px;
+.authForm h2 {
+  font-size: $font-size20;
 }
 
-.authForm p{
-  font-size: 16px;
+.multi-step-form-container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.authForm p {
+  font-size: $font-size20;
 }
 
 .row {
-    display: flex;
-    gap: 30px; 
-    justify-content: space-evenly;
-    margin-bottom: 20px; 
-    flex-wrap: wrap; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-    width: 100%;
+  display: flex;
+  gap: 30px;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .field-container {
-    width: 400px;
-    display: flex;
-    flex-direction: column; // Stack label and input vertically
+  width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-    margin-bottom: 5px; // Space below the label
-    font-size: 14px; // Adjust label font size
-    font-weight: bold; // Make the label bold for visibility
-    color: #333; // Optional: Set label color for contrast
+  margin-bottom: 5px;
+  font-size: $font-size18;
+  font-weight: bold;
 }
 
 input {
-    padding: 8px; // Padding inside input fields
-    border: 1px solid #ccc; // Border style
-    border-radius: 4px; // Rounded corners for inputs
-    font-size: 16px; // Input font size
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 input:focus {
-    border-color: #007bff; // Change border color on focus
-    outline: none; // Remove default outline
-}
-
-.input-error {
-  border: 2px solid red;
+  border-color: #fff700;
+  outline: none;
 }
 
 .login {
   margin-bottom: 10px;
 }
 
-.button-group {
+.loadingBtn {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.button {
-  padding: 10px 15px; // Padding inside buttons
-  border: none; // Remove default border
-  border-radius: 4px; // Rounded corners for buttons
-  background-color: #007bff; // Button background color
-  color: #fff; // Button text color
-  font-size: 16px; // Button font size
+.ball-loader {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #007bff;
+  animation: bounce 0.6s infinite alternate;
+}
 
-  &:hover {
-    background-color: #0056b3; // Darker shade on hover
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
   }
 
-  &:disabled {
-    background-color: #ccc; // Change color when disabled
-    cursor: not-allowed; // Show not-allowed cursor
+  100% {
+    transform: translateY(-15px);
   }
 }
+
 
 .success-container {
+  background-color: $background-color;
   display: flex;
   flex-direction: column;
   justify-content: center;

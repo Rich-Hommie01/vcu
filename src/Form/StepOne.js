@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StepOne = ({ formData, handleChange, handleBlur, touched, errors }) => {
+const StepOne = ({ formData = {}, handleChange, errors = {} }) => {
   return (
     <div className="step">
       <div className="row">
@@ -12,11 +12,10 @@ const StepOne = ({ formData, handleChange, handleBlur, touched, errors }) => {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            onBlur={handleBlur}
             placeholder="First Name"
-            className={errors.firstName && touched.firstName ? 'input-error' : ''}
+            className={errors.firstName ? 'input-error' : ''}
           />
-          {errors.firstName && <p className="error">{errors.firstName}</p>}
+          {errors.firstName && <p className="errorMessage">{errors.firstName}</p>}
         </div>
         
         <div className="field-container">
@@ -38,12 +37,11 @@ const StepOne = ({ formData, handleChange, handleBlur, touched, errors }) => {
             id="lastName"
             name="lastName"
             value={formData.lastName}
-            onChange={handleChange}
-            onBlur={handleBlur} 
+            onChange={handleChange} 
             placeholder="Last Name"
-            className={errors.lastName && touched.lastName ? 'input-error' : ''}
+            className={errors.lastName ? 'input-error' : ''}
           />
-          {errors.lastName && <p className="error">{errors.lastName}</p>}
+          {errors.lastName && <p className="errorMessage">{errors.lastName}</p>}
         </div>
 
         <div className="field-container">
@@ -54,11 +52,10 @@ const StepOne = ({ formData, handleChange, handleBlur, touched, errors }) => {
             name="ssn"
             value={formData.ssn}
             onChange={handleChange}
-            onBlur={handleBlur}
             placeholder="SSN"
-            className={errors.ssn && touched.ssn ? 'input-error' : ''}
+            className={errors.ssn ? 'input-error' : ''}
           />
-          {errors.ssn && <p className="error">{errors.ssn}</p>}
+          {errors.ssn && <p className="errorMessage">{errors.ssn}</p>}
         </div>
 
         <div className="field-container">
@@ -69,10 +66,9 @@ const StepOne = ({ formData, handleChange, handleBlur, touched, errors }) => {
             name="dob"
             value={formData.dob}
             onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.dob && touched.dob ? 'input-error' : ''}
+            className={errors.dob ? 'input-error' : ''}
           />
-          {errors.dob && <p className="error">{errors.dob}</p>}
+          {errors.dob && <p className="errorMessage">{errors.dob}</p>}
         </div>
       </div>
     </div>

@@ -1,0 +1,164 @@
+@import '../components/variables.scss';
+
+.transaction-buttons {
+    display: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 10px;
+    height: 100vh;
+}
+
+.grid-item {
+    background-color: $background-color;
+    padding: 10px;
+}
+
+.welcomeContainer {
+    background-color: $background-color;
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+}
+
+.sidebar li {
+    cursor: pointer;
+    padding: 8px;
+    font-size: $font-size18;
+}
+
+.rightdiv {
+    font-size: $font-size18;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.searchdiv {
+    text-align: center;
+}
+
+.Ptext {
+    background-color: #df4a18;
+    color: bisque;
+    padding: 5px;
+}
+
+.submitted {
+    background-color: #000b5b;
+    padding: 5px;
+}
+
+.AccountBalance {
+    background: linear-gradient(300deg, rgba(241, 235, 159, 0.9523356461725315) 25%, rgba(245, 237, 186, 0.8711031531753326) 49%, rgba(235, 229, 171, 0.7898706601781338) 77%);
+    font-size: $font-size18;
+}
+
+.accountsh2 {
+    display: flex;
+    font-size: $font-size20;
+    padding: 5px;
+    justify-content: space-between;
+} 
+
+.bankaccount1 {
+    background-color: rgba(255, 153, 0, 0.283);
+    border-left: 8px solid #df1818;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.bankaccount2 {
+    background-color: rgba(255, 153, 0, 0.283);
+    border-left: 8px solid #000b5b;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.availablecurrent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.totaldeposit {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    background: rgb(241, 235, 159);
+  background: linear-gradient(300deg, rgba(241, 235, 159, 0.9523356461725315) 25%, rgba(245, 237, 186, 0.8711031531753326) 49%, rgba(235, 229, 171, 0.7898706601781338) 77%);
+  }
+  
+  .Navmenu {
+    margin-left: auto;
+  }
+  
+  .menu-container {
+    position: absolute;
+    padding: 3px;
+    top: 20;
+    right: 0;
+    width: 200px;background: rgb(241, 235, 159);
+    background: linear-gradient(300deg, rgba(241, 235, 159, 0.9523356461725315) 25%, rgba(245, 237, 186, 0.8711031531753326) 49%, rgba(235, 229, 171, 0.7898706601781338) 77%);
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .menu-container.show {
+    display: block;
+  }
+  
+  .ulcontainer {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .ulcontainer.mobile {
+    display: block;
+  }
+
+@media (max-width: 1081px) {
+    .grid-container {
+        grid-template-columns: 3fr 1fr;
+    }
+
+    .leftnav {
+        display: none;
+    }
+
+    .rigthNav {
+        font-size: $font-size15;
+    }
+
+    .Navmenu {
+        display: block;
+    }
+
+    .menu-container.show,
+    .ulcontainer.show {
+        display: block;
+    }
+
+}
+
+@media (max-width: 881px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        
+        .rigthNav {
+            display: none;
+        }
+    }
+}

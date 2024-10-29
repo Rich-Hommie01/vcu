@@ -1,0 +1,62 @@
+@import '../components/variables.scss';
+
+.availableBalance {
+    font-size: $font-size18;
+}
+
+.TransactionsDetails p {
+    display: inline-flex;
+    padding-right: 15px;
+    margin-top: 30px;
+    font-size: $font-size18;
+}
+
+.searchContainer {
+    width: 100%;
+    border-top: 1px solid black;
+}
+
+.searchContainer p {
+    float: right;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    font-size: $font-size18;
+}
+
+.DDA {
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: $font-size18;
+}
+
+.transactionHistory {
+    display: flex;
+    gap: 10;
+    justify-content: space-between;
+    font-size: $font-size18;
+}
+
+.transactionDescription {
+    display: flex;
+    justify-content: center;
+    font-size: $font-size18;
+}
+
+.detailsContainer {
+    border-top: 1px solid black;
+    font-size: $font-size18;
+    line-height: 35px;
+}
+
+.detailsTexts {
+    display: flex;
+}
+
+.settingsBoldText {
+    font-size: $font-size15;
+    font-weight: 600;
+}

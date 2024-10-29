@@ -1,6 +1,7 @@
 import React from 'react';
 
-const StepTwo = ({ formData, handleChange, handleBlur, touched, errors }) => {
+const StepTwo = ({ formData = {}, handleChange, errors = {} }) => {
+
   return (
     <div className="step">
       <div className="row">
@@ -13,11 +14,11 @@ const StepTwo = ({ formData, handleChange, handleBlur, touched, errors }) => {
             value={formData.street}
             onChange={handleChange}
             placeholder="Street"
-            onBlur={handleBlur}
-            className={errors.street && touched.street ? 'input-error' : ''}
+            className={errors.street ? 'input-error' : ''}
           />
-          {errors.street && <p className="error">{errors.street}</p>}
+          {errors.street && <p className="errorMessage">{errors.street}</p>}
         </div>
+
         <div className="field-container">
           <label htmlFor="apt">Apt or Unit# (optional)</label>
           <input
@@ -29,6 +30,7 @@ const StepTwo = ({ formData, handleChange, handleBlur, touched, errors }) => {
             placeholder="Apt or Unit#"
           />
         </div>
+
         <div className="field-container">
           <label htmlFor="city">City</label>
           <input
@@ -38,11 +40,11 @@ const StepTwo = ({ formData, handleChange, handleBlur, touched, errors }) => {
             value={formData.city}
             onChange={handleChange}
             placeholder="City"
-            onBlur={handleBlur}
-            className={errors.city && touched.city ? 'input-error' : ''}
+            className={errors.city ? 'input-error' : ''}
           />
-          {errors.city && <p className="error">{errors.city}</p>}
+          {errors.city && <p className="errorMessage">{errors.city}</p>}
         </div>
+
         <div className="field-container">
           <label htmlFor="state">State</label>
           <input
@@ -52,11 +54,11 @@ const StepTwo = ({ formData, handleChange, handleBlur, touched, errors }) => {
             value={formData.state}
             onChange={handleChange}
             placeholder="State"
-            onBlur={handleBlur}
-            className={errors.state && touched.state ? 'input-error' : ''}
+            className={errors.state ? 'input-error' : ''}
           />
-          {errors.state && <p className="error">{errors.state}</p>}
+          {errors.state && <p className="errorMessage">{errors.state}</p>}
         </div>
+
         <div className="field-container">
           <label htmlFor="zipCode">Zip Code</label>
           <input
@@ -66,10 +68,9 @@ const StepTwo = ({ formData, handleChange, handleBlur, touched, errors }) => {
             value={formData.zipCode}
             onChange={handleChange}
             placeholder="Zip Code"
-            onBlur={handleBlur}
-            className={errors.zipCode && touched.zipCode ? 'input-error' : ''}
+            className={errors.zipCode ? 'input-error' : ''}
           />
-          {errors.zipCode && <p className="error">{errors.zipCode}</p>}
+          {errors.zipCode && <p className="errorMessage">{errors.zipCode}</p>}
         </div>
       </div>
     </div>

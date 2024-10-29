@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
+const StepFive = ({ formData, handleChange, errors, }) => {
 
   const showOccupationField = formData.employment && !['Retired', 'Unemployed'].includes(formData.employment);
 
@@ -14,7 +14,6 @@ const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
           value="Employed"
           checked={formData.employment === 'Employed'}
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         Employed
       </label>
@@ -26,7 +25,6 @@ const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
           value="Self Employed"
           checked={formData.employment === 'Self Employed'}
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         Self Employed
       </label>
@@ -38,7 +36,6 @@ const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
           value="Retired"
           checked={formData.employment === 'Retired'}
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         Retired
       </label>
@@ -50,7 +47,6 @@ const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
           value="Unemployed"
           checked={formData.employment === 'Unemployed'}
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         Unemployed
       </label>
@@ -62,7 +58,6 @@ const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
           value="Other"
           checked={formData.employment === 'Other'}
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         Other
       </label>
@@ -76,11 +71,10 @@ const StepFive = ({ formData, handleChange, handleBlur, errors, touched }) => {
               name="occupation"
               value={formData.occupation || ''}
               onChange={handleChange}
-              onBlur={handleBlur}
               required={true}
             />
           </label>
-          {errors.occupation && touched.occupation && <span className="error">{errors.occupation}</span>}
+          {errors.occupatio && <span className="errorMessage">{errors.occupation}</span>}
         </div>
       )}
     </div>

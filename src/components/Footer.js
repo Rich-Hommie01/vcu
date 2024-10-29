@@ -1,5 +1,4 @@
 import React from "react";
-import "./Footer.scss";
 import {
   FaSquareFacebook,
   FaXTwitter,
@@ -10,12 +9,12 @@ import {
 
 const Footer = ({ className }) => {
   return (
-    <section className="FooterContainer">
-      <div className={`FooterCo ${className}`}>
-        <div className={`innerContent ${className}`}>
-          <h2 className="innerTextContent">ABOUT</h2>
+    <div className="FooterContainer">
+      <div className={`FooterTopContainer ${className}`}>
+        <div className={`innerFooterContainer ${className}`}>
+          <h2 className="innerFooterH2TextContent">ABOUT</h2>
           <ul>
-            <li className="li-hover">About American Express</li>
+            <li className="li-hover">About Vaylx</li>
             <li className="li-hover">Newsroom</li>
             <li className="li-hover">Investor Relations</li>
             <li className="li-hover">Careers</li>
@@ -23,8 +22,8 @@ const Footer = ({ className }) => {
             <li className="li-hover">Contact Us</li>
           </ul>
         </div>
-        <div className={`innerContent ${className}`}>
-          <h2 className="innerTextContent">PRODUCTS & SERVICES</h2>
+        <div className={`innerFooterContent ${className}`}>
+          <h2 className="innerFooterH2TextContent">PRODUCTS & SERVICES</h2>
           <ul>
             <li className="li-hover">Credit Cards</li>
             <li className="li-hover">Business Credit Cards</li>
@@ -35,8 +34,8 @@ const Footer = ({ className }) => {
           </ul>
         </div>
 
-        <div className={`innerContent ${className}`}>
-          <h2 className="innerTextContent">LINKS YOU MAY LIKE</h2>
+        <div className={`innerFooterContent ${className}`}>
+          <h2 className="innerFooterH2TextContent">LINKS YOU MAY LIKE</h2>
           <ul>
             <li className="li-hover">Membership Rewards</li>
             <li className="li-hover">FICO® Score and Insights</li>
@@ -46,8 +45,8 @@ const Footer = ({ className }) => {
           </ul>
         </div>
 
-        <div className={`innerContent ${className}`}>
-          <h2 className="innerTextContent">ADDITIONAL INFORMATION</h2>
+        <div className={`innerFooterContent ${className}`}>
+          <h2 className="innerFooterH2TextContent">ADDITIONAL INFORMATION</h2>
           <ul>
             <li className="li-hover">
               Credit Intel - Financial Education Center
@@ -59,7 +58,7 @@ const Footer = ({ className }) => {
           </ul>
         </div>
       </div>
-      <div className={`footerInnerText ${className}`}>
+      <div className={`footerMiddleContainer ${className}`}>
         <ul className="ulFooterText">
           <li className="liHover">Terms of Service</li>
 
@@ -96,19 +95,19 @@ const Footer = ({ className }) => {
       </div>
       <div className="vfcurn">
         <p>
-          &nbsp;&nbsp;&nbsp;© 2024 Virgin Federal Credit Union. All rights
+          &nbsp;&nbsp;&nbsp;© 2024 Vaylx Credit Union. All rights
           reserved.
         </p>
-        <span>
+        <span className="footerIcon">
           <FaSquareFacebook className="reactIcon" />
           <FaXTwitter className="reactIcon" />
           <FaInstagram className="reactIcon" />
           <FaLinkedin className="reactIcon" />
           <FaYoutube className="reactIcon" />
         </span>
-        <p>&nbsp;&nbsp;&nbsp;Routing Number: 211170282</p>
+        <p>&nbsp;&nbsp;&nbsp;Routing Number: 197298915</p>
       </div>
-    </section>
+    </div>
   );
 };
 

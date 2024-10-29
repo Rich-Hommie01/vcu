@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
+const StepFour = ({ formData, handleChange, errors }) => {
   const [idType, setIdType] = useState('');
 
   return (
@@ -40,11 +40,10 @@ const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
               name="idNumber"
               value={formData.idNumber}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.idNumber && touched.idNumber ? 'input-error' : ''}
+              className={errors.idNumber ? 'input-error' : ''}
             />
-            {errors.idNumber && touched.idNumber && (
-              <p className="error">{errors.idNumber}</p>
+            {errors.idNumber && (
+              <p className="errorMessage">{errors.idNumber}</p>
             )}
           </div>
 
@@ -56,11 +55,10 @@ const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
               name="issueState"
               value={formData.issueState}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.issueState && touched.issueState ? 'input-error' : ''}
+              className={errors.issueState ? 'input-error' : ''}
             />
-            {errors.issueState && touched.issueState && (
-              <p className="error">{errors.issueState}</p>
+            {errors.issueState && (
+              <p className="errorMessage">{errors.issueState}</p>
             )}
           </div>
 
@@ -72,11 +70,10 @@ const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
               name="expirationDate"
               value={formData.expirationDate}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.expirationDate && touched.expirationDate ? 'input-error' : ''}
+              className={errors.expirationDate ? 'input-error' : ''}
             />
-            {errors.expirationDate && touched.expirationDate && (
-              <p className="error">{errors.expirationDate}</p>
+            {errors.expirationDate && (
+              <p className="errorMessage">{errors.expirationDate}</p>
             )}
           </div>
         </div>
@@ -92,11 +89,10 @@ const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
               name="idNumber"
               value={formData.idNumber}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.idNumber && touched.idNumber ? 'input-error' : ''}
+              className={errors.idNumber ? 'input-error' : ''}
             />
-            {errors.idNumber && touched.idNumber && (
-              <p className="error">{errors.idNumber}</p>
+            {errors.idNumber && (
+              <p className="errorMessage">{errors.idNumber}</p>
             )}
           </div>
 
@@ -108,11 +104,10 @@ const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
               name="issueState"
               value={formData.issueState}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.issueState && touched.issueState ? 'input-error' : ''}
+              className={errors.issueState ? 'input-error' : ''}
             />
-            {errors.issueState && touched.issueState && (
-              <p className="error">{errors.issueState}</p>
+            {errors.issueState && (
+              <p className="errorMessage">{errors.issueState}</p>
             )}
           </div>
 
@@ -124,11 +119,10 @@ const StepFour = ({ formData, handleChange, handleBlur, touched, errors }) => {
               name="expirationDate"
               value={formData.expirationDate}
               onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.expirationDate && touched.expirationDate ? 'input-error' : ''}
+              className={errors.expirationDate ? 'input-error' : ''}
             />
-            {errors.expirationDate && touched.expirationDate && (
-              <p className="error">{errors.expirationDate}</p>
+            {errors.expirationDate && (
+              <p className="errorMessage">{errors.expirationDate}</p>
             )}
           </div>
         </div>

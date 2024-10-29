@@ -1,4 +1,4 @@
-@import '../Home/variables.scss';
+@import '../components/variables.scss';
 
 .headerContainer.forgetuser {
   display: block;
@@ -46,19 +46,6 @@
   max-width: 20em;
 }
 
-.submit-btn {
-  margin-top: 15px;
-  padding: 10px 15px;
-  background-color: $main-btn-color;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  opacity: 0.9;
-}
-
 .password-input-container,
 .username-input-container {
   position: relative;
@@ -73,7 +60,7 @@
     box-sizing: border-box;
 
     &:focus {
-      border-bottom: 2px solid #0056b3; // Change border color on focus (optional)
+      border-bottom: 2px solid #0056b3;
     }
   }
 
@@ -89,12 +76,11 @@
     color: #007BFF;
 
     &:focus {
-      outline: none; // Remove focus outline for the button
+      outline: none;
     }
   }
 }
 
-// Error message styling
 .error-message {
   color: red;
   font-size: 14px;

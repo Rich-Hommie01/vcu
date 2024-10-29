@@ -1,16 +1,16 @@
 import React from "react";
 import "./Main.scss";
-import Navbar from "../HomePage/Navbar";
-import Display from "../HomePage/Display";
-import Body from "./Body";
-import Footer from "../HomePage/Footer";
+import Nav from "./Nav";
+import Display from "./Display";
+import Homepage from "./Homepage";
+import Footer from "./Footer";
 
 const NewPage = () => {
   return (
     <div>
       <Display>
-        <Navbar />
-        <Body />
+        <Nav />
+        <Homepage />
         <Footer />
       </Display>
     </div>

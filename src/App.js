@@ -1,28 +1,49 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Main from "./Home/Main";
+import { Routes, Route } from 'react-router-dom';
+import Main from "./components/Main";
 import Login from "./Login/Login";
 import Register from "./Form/Register";
-import BankHome from "./Banking/BankHome";
-import { AuthProvider } from "./auth/AuthProvider";
-import ProtectedRoute from "./routes/ProtectedRoute";
-import BankSummary1 from './Banking/BankSummary1'
-import BankSummary2 from './Banking/BankSummary2'
-import ForgetUserPass from './ResetAccount/ForgetUserPass'
+import Error from "./Form/Error";
+import ProtectedRoute from './Banking/ProtectedRoute';
+import Bankhome from "./Banking/Bankhome";
+import Banksummary1 from './Banking/Banksummary1';
+import Banksummary2 from './Banking/Banksummary2';
+import ForgetUserPass from './ResetAccount/ForgetUserPass';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Routes>
-        <Route exact path="/" element={<Main />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
-        <Route exact path="/bankHome" element={ <ProtectedRoute> <BankHome /> </ProtectedRoute> } />
-        <Route exact path="/bankSummary1" element={ <ProtectedRoute> <BankSummary1 /> </ProtectedRoute> } /> 
-        <Route exact path="/bankSummary2" element={ <ProtectedRoute> <BankSummary2 /> </ProtectedRoute> } /> 
-        <Route exact path="/forgetUserPass" element={ <ForgetUserPass /> } /> 
-        </Routes>
-    </AuthProvider>
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/error" element={<Error />} />
+      <Route path="/forgetUserPass" element={<ForgetUserPass />} />
+
+      <Route
+        path="/bankhome"
+        element={
+          <ProtectedRoute>
+            <Bankhome />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/banksummary1"
+        element={
+          <ProtectedRoute>
+            <Banksummary1 />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/banksummary2"
+        element={
+          <ProtectedRoute>
+            <Banksummary2 />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 };
 

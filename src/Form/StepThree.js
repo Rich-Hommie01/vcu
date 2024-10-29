@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StepThree = ({ formData, handleChange, handleBlur, errors, touched }) => {
+const StepThree = ({ formData = {}, handleChange, errors = {} }) => {
   return (
     <div className="row">
       <div className="field-container">
@@ -11,10 +11,9 @@ const StepThree = ({ formData, handleChange, handleBlur, errors, touched }) => {
           name="username"
           value={formData.username}
           onChange={handleChange}
-          onBlur={handleBlur}
-          className={touched.username && errors.username ? 'input-error' : ''}
+          className={errors.username ? 'input-error' : ''}
         />
-        {touched.username && errors.username && <p className="error-message">{errors.username}</p>}
+        {errors.username && <p className="errorMessage">{errors.username}</p>}
       </div>
 
       <div className="field-container">
@@ -25,10 +24,9 @@ const StepThree = ({ formData, handleChange, handleBlur, errors, touched }) => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          onBlur={handleBlur}
-          className={touched.password && errors.password ? 'input-error' : ''}
+          className={errors.password ? 'input-error' : ''}
         />
-        {touched.password && errors.password && <p className="error-message">{errors.password}</p>}
+        {errors.password && <p className="errorMessage">{errors.password}</p>}
       </div>
 
       <div className="field-container">
@@ -39,10 +37,9 @@ const StepThree = ({ formData, handleChange, handleBlur, errors, touched }) => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          onBlur={handleBlur}
-          className={touched.phone && errors.phone ? 'input-error' : ''}
+          className={errors.phone ? 'input-error' : ''}
         />
-        {touched.phone && errors.phone && <p className="error-message">{errors.phone}</p>}
+          {errors.phone && <p className="errorMessage">{errors.phone}</p>}
       </div>
     </div>
   );
