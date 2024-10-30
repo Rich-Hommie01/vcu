@@ -188,8 +188,8 @@ const Register = () => {
             <div>
               <IntroContent />
               <div className='btnContainer'>
-                <button className='Btn' onClick={goToLogin}>Back to Login</button>
-                <button className='Btn' onClick={handleNext}>Next</button>
+                <button className='Btn memberBtn' onClick={goToLogin}>Back to Login</button>
+                <button className='Btn memberBtn' onClick={handleNext}>Next</button>
               </div>
             </div>
           )}

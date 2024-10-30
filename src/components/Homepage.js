@@ -21,7 +21,7 @@ const Homepage = () => {
           <p>A better way of banking with a Credit Union that is immersed in the community, featuring the latest in
             technology, innovative products and services, and easy access to all of your accounts.</p>
           <p>The Safest Plan is Often the Smartest One</p>
-          <button type="button" className="Btn" onClick={() => handleNavigation("/register")}>Become a Member</button>
+          <button type="button" className="Btn memberBtn" onClick={() => handleNavigation("/register")}>Become a Member</button>
         </div>
         <img src={vcubalance} alt='vcubalance' style={{ width: "500px", height: "auto" }} />
       </div>
