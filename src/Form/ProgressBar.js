@@ -1,15 +1,11 @@
 import React from 'react';
 import './ProgressBar.scss';
 
-const ProgressBar = ({ currentStep, totalSteps, stepMessages }) => {
+const ProgressBar = ({ currentStep, totalSteps }) => {
   const progressPercentage = (currentStep / totalSteps) * 100;
 
   return (
     <div className="progress-bar-container">
-      {/* Dynamic Step Information Text */}
-      <div className="step-info">
-        {stepMessages[currentStep - 1]} {/* Show message based on current step */}
-      </div>
 
       {/* Progress bar */}
       <div className="progress-bar">

@@ -11,11 +11,12 @@ import StepFour from './StepFour';
 import StepFive from './StepFive';
 import StepSix from './StepSix';
 import { Spinner } from 'react-bootstrap';
+import ProgressBar from './ProgressBar';  // Import ProgressBar
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentStep, formData, errors, loading } = useSelector((state) => state.registration);
+  const { currentStep = 0, formData, errors, loading } = useSelector((state) => state.registration);
 
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
@@ -29,6 +30,8 @@ const Register = () => {
       dispatch(setError({ field: name, error: '' }));
     }
   };
+
+  
 
   const checkUsernameAvailability = async () => {
     try {
@@ -83,7 +86,6 @@ const Register = () => {
           navigate('/error');
           dispatch(resetRegistration());
         }
-
       } catch (error) {
         console.error('Error submitting form:', error);
       } finally {
@@ -184,6 +186,8 @@ const Register = () => {
       <Nav className='registerNav' />
       <div className='registerContainer'>
         <div className='registerForm'>
+          <ProgressBar currentStep={currentStep} totalSteps={6} /> 
+
           {currentStep === 0 && (
             <div>
               <IntroContent />
