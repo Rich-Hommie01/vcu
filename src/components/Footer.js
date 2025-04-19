@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaSquareFacebook,
   FaXTwitter,
@@ -8,6 +8,18 @@ import {
 } from "react-icons/fa6";
 
 const Footer = ({ className }) => {
+
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    // Get the current date
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString("en-US", {
+      year: "numeric"
+    });
+    setCurrentDate(formattedDate);
+  }, []);
+
   return (
     <div className="FooterContainer">
       <div className={`FooterTopContainer ${className}`}>
@@ -95,7 +107,7 @@ const Footer = ({ className }) => {
       </div>
       <div className="vfcurn">
         <p>
-          &nbsp;&nbsp;&nbsp;© 2024 Vaylx Credit Union. All rights
+          &nbsp;&nbsp;&nbsp;© {currentDate} Vaylx Credit Union. All rights
           reserved.
         </p>
         <span className="footerIcon">

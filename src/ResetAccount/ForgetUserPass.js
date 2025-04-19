@@ -42,7 +42,7 @@ const ForgetUserPass = () => {
 
   return (
     <>
-      <Nav className='forgetuser' />
+      <Nav className='loginNav' />
 
       <div className='faquser'>
         <div className='left-side'>

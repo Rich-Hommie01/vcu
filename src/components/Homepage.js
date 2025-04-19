@@ -43,7 +43,7 @@ const Homepage = () => {
 
       <div className='centerContainer'>
         <div className='centerInnerContainer'>
-          <img src={memberperks} alt='memberperks' style={{ width: "260", height: "auto" }} />
+          <img src={memberperks} alt='memberperks' className='memberperks' />
           <h2 className='centerH2Container'>Membership Perks</h2>
           <p className='centerInnerTextr'>At Valyx, we want you to meet your financial goals. There’s no fee to join and your membership includes a savings account with $1 deposited to get you started.</p>
           <button className='Btn'>Learn More</button>

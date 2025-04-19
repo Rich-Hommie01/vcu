@@ -11,7 +11,7 @@ import StepFour from './StepFour';
 import StepFive from './StepFive';
 import StepSix from './StepSix';
 import { Spinner } from 'react-bootstrap';
-import ProgressBar from './ProgressBar';  // Import ProgressBar
+import ProgressBar from './ProgressBar';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -25,13 +25,10 @@ const Register = () => {
     } else {
       dispatch(setFormData({ field: name, value }));
     }
-
     if (errors[name]) {
       dispatch(setError({ field: name, error: '' }));
     }
   };
-
-  
 
   const checkUsernameAvailability = async () => {
     try {

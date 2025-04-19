@@ -5,6 +5,7 @@ import './Bankhome.scss';
 import Banksummary1 from './Banksummary1';
 import Banksummary2 from './Banksummary2';
 import fraud from '../img/fraud.jpg';
+import "./ToggleSwitch.css";
 import { IoHomeOutline, IoMenuOutline, IoChevronDownOutline } from "react-icons/io5";
 import { SlEnvolopeLetter, SlCreditCard } from "react-icons/sl";
 import { FcCellPhone } from "react-icons/fc";
@@ -21,6 +22,23 @@ const Bankhome = () => {
     const [showSummary2, setShowSummary2] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1081);
+    const [activeSection, setActiveSection] = useState(null);
+    
+    const [alerts, setAlerts] = useState({
+        externalTransfer: false,
+        computerRegistered: false,
+        Registered: false,
+        // add more alerts as needed
+    });
+    
+    const handleAlertToggle = (alertKey) => {
+        setAlerts(prev => ({
+            ...prev,
+            [alertKey]: !prev[alertKey],
+        }));
+    };
+    
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -68,9 +86,16 @@ const Bankhome = () => {
     const { checking: checkingAccount, savings: savingsAccount } = user.accounts;
     const { checking: checkingBalance, savings: savingsBalance } = user.balance;
 
+    const handleHomeClick = () => {
+        setShowSummary(false);
+        setShowSummary2(false);
+        setActiveSection(null);
+    };
+
     const handleBack = () => {
         setShowSummary(false);
         setShowSummary2(false);
+        setActiveSection(null);
     };
 
 
@@ -103,7 +128,7 @@ const Bankhome = () => {
 
             <div className={`menu-container ${isMobileMenuOpen ? 'show' : ''}`}>
                 <ul className={`ulcontainer ${isMobileMenuOpen ? 'show' : ''}`}>
-                    <li><IoHomeOutline /> Home</li>
+                    <li onClick={handleHomeClick}><IoHomeOutline /> Home</li>
                     <li><SlEnvolopeLetter /> Messages</li>
                     <li><IoMenuOutline /> Bill Pay</li>
                     <li onClick={() => toggleSubItems(4)}>
@@ -124,6 +149,7 @@ const Bankhome = () => {
                                 <li>Account List</li>
                                 <li>Add External Account</li>
                                 <li>Verify External Account</li>
+                                <li onClick={() => setActiveSection('alert')}>Alerts</li>
                             </ul>
                         )}
                     </li>
@@ -156,7 +182,7 @@ const Bankhome = () => {
                 <div className="grid-item leftnav">
                     <div className="sidebar">
                         <ul>
-                            <li><IoHomeOutline /> Home</li>
+                            <li onClick={handleHomeClick}><IoHomeOutline /> Home</li>
                             <li><SlEnvolopeLetter /> Messages</li>
                             <li><IoMenuOutline /> Bill Pay</li>
                             <li onClick={() => toggleSubItems(4)}>
@@ -177,6 +203,7 @@ const Bankhome = () => {
                                         <li>Account List</li>
                                         <li>Add External Account</li>
                                         <li>Verify External Account</li>
+                                        <li onClick={() => setActiveSection('alert')}>Alerts</li>
                                     </ul>
                                 )}
                             </li>
@@ -184,7 +211,7 @@ const Bankhome = () => {
                                 <CiSettings /> Settings <IoChevronDownOutline />
                                 {subItemsVisibility[6] && (
                                     <ul className="sub-items">
-                                        <li>Account Preferences</li>
+                                        <li onClick={() => setActiveSection('accountPreferences')}>Account Preferences</li>
                                         <li>Security Preferences</li>
                                         <li>Themes</li>
                                         <li>Statement Preferences</li>
@@ -199,7 +226,81 @@ const Bankhome = () => {
                 </div>
 
                 <div className="grid-item">
-                    {!showSummary && !showSummary2 ? (
+                    {activeSection === 'accountPreferences' ? (
+                        <div className="AccountPreferences">
+                            <p>Change online Account Nicknames, enable Text Banking by suffix, or hide suffix's you don't wish to see on the homepage here.</p>
+                            <h1>Account Preferences</h1>
+                            <p>Click anywhere on the account row if you woukd like to add/edit an account nickname, enable SMS/TEXT banking or view account details Group and sort accounts as they are displayed on the homepage</p>
+                            <h2>Accounts</h2>
+                            <h1>PERSONAL CHECKING</h1>
+                            <p>Details</p>
+                            <p>SMS/Text</p>
+                            <p>Online Display Name</p>
+                            <h2>PERSONAL CHECKING</h2>
+                            <p>Current Account Group</p>
+                            <p>Account Visibility</p>
+                            <p>Home</p>
+                            <p>Financial Tools</p>
+                            <button onClick={handleBack}>Back</button>
+                        </div>
+                    ) : activeSection === 'alert' ? (
+                        <div>
+                            <p className='Ealert'>E-Alert set up and modification, Receive notification to your email, by phone, Text, or online banking. To stay on top of your VCU Account.</p>
+                            <h1>SECURITY ALERTS(18)</h1>
+                            <div className='alertContainer'>
+                            <div className='hitman'>
+    <p>Edit Delivery Preferences</p>
+    <label className="switch">
+        <input
+            type="checkbox"
+            checked={alerts.externalTransfer}
+            onChange={() => handleAlertToggle('externalTransfer')}
+        />
+        <span className="slider"></span>
+    </label>
+</div>
+
+<div className='hitman'>
+    <p>Alert me when an external transfer is authorized.</p>
+    <label className="switch">
+        <input
+            type="checkbox"
+            checked={alerts.computerRegistered}
+            onChange={() => handleAlertToggle('computerRegistered')}
+        />
+        <span className="slider"></span>
+    </label>
+</div>
+<div className='hitman'>
+                            <p>Alert me when a computer/brower is succesfully registered.</p>
+                            <label className="switch">
+        <input
+            type="checkbox"
+            checked={alerts.Registered}
+            onChange={() => handleAlertToggle('Registered')}
+        />
+        <span className="slider"></span>
+    </label>
+</div>
+                            <p>Alert me when my password is changed.</p>
+                            <p>Alert me when secure access code contact information is changed.</p>
+                            <p>Alert me when when my login ID is changed.</p>
+                            <p>Alert me when the process to add an external account is started.</p>
+                            <p>Alert me when forgot password is attempted for my login ID.</p>
+                            <p>Alert me when invalid password for my login ID is submitted.</p>
+                            <p>Alert me when the forgot password process is attempted unsucessfully.</p>
+                            <p>Alert me when invalid secure access code submitted.</p>
+                            <p>Alert me when my login ID is disabled.</p>
+                            <p>Alert me when my login ID is locked out.</p>
+                            <p>Alert me when new user is created.</p>
+                            <p>Alert me when my Security Preferences are changed.</p>
+                            <p>Alert me when my my user profile is updated.</p>
+                            <p>Alert me when a valid password for my login ID is submitted.</p>
+                            <p>Alert me when the forgot password process is succesfully completed.</p>
+                            <p>Alert me when a valid secure access code is submitted.</p>
+                            </div>
+                        </div>
+                    ) : !showSummary && !showSummary2 ? (
                         <div className="AccountBalance">
                             <h2 className="accountsh2" onClick={() => setShowSummary(true)}>ACCOUNTS <span><BsThreeDotsVertical /></span></h2>
                             <div className="bankaccount1" onClick={() => setShowSummary(true)}>

@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [ username, setUsername ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ isLoginDisabled, setIsLoginDisabled ] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
@@ -16,16 +17,21 @@ const Login = () => {
     event.preventDefault();
 
     if (username && password) {
+      setIsLoginDisabled(true);
       const resultAction = await dispatch(loginUser({ username, password }));
 
       if (loginUser.fulfilled.match(resultAction)) {
         navigate("/bankhome");
+      } else {
+        setIsLoginDisabled(false);
       }
     }
   };
 
   const handleForgotPassword = () => {
+    if(!isLoginDisabled){
     navigate("/forgetUserPass");
+  }
   };
 
   return (
